@@ -31,6 +31,34 @@ export default function App({ Component, pageProps, router }) {
         {/* Favicon Links */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+        {/* Structured Data for Contact Information */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Clever Project",
+              "url": "https://www.cleverproject.lk",
+              "logo": "https://www.cleverproject.lk/logo.png",
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+94704057137",
+                  "contactType": "customer service",
+                  "areaServed": "LK",
+                  "availableLanguage": ["English", "Sinhala"]
+                }
+              ],
+              "sameAs": [
+                "https://www.facebook.com/cleverprojects",
+                "https://www.linkedin.com/company/cleverprojects",
+                "https://twitter.com/cleverProjectlk"
+              ]
+            }),
+          }}
+        />
       </Head>
 
       <Nav />
