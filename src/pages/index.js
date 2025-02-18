@@ -32,7 +32,7 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
 
         {/* Favicon */}
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+        {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" /> */}
       </Head>
 
       <Cover>
