@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.cleverproject.lk
+
+# Sitemaps
+Sitemap: https://www.cleverproject.lk/sitemap.xml
