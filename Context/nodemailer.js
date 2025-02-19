@@ -1,17 +1,15 @@
 import nodemailer from "nodemailer";
 
-const email = process.env.EMAIL;
-const pass = process.env.PASS;
-
 export const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.zoho.com", // Zoho SMTP Server
+  port: 465, // SSL Port
+  secure: true, // Use SSL
   auth: {
-    user: email,
-    pass,
+    user: process.env.ZOHO_EMAIL, // Use environment variable
+    pass: process.env.ZOHO_PASSWORD, // Use environment variable
   },
 });
 
 export const mailOptions = {
-  from: email,
-  to: email,
+  from: `"Clever Project" <info@cleverproject.lk>`, // Your Zoho email
 };

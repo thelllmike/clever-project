@@ -9,20 +9,34 @@ export default async function handler(req, res) {
 
   const { name, message, email } = req.body;
 
-  if (!name || !message || !email || message === "message") {
-    return res.status(400).json({ msg: ["Bad request"] });
+  // Validate request data
+  if (!name || !message || !email || message.trim() === "") {
+    return res.status(400).json({ msg: "Invalid request data" });
   }
 
   try {
+    // Send email to info@cleverproject.lk
     await transporter.sendMail({
-      ...mailOptions,
-      subject: "You have a mail to Cleaver Projects by " + name,
-      text: "Sample text",
-      html: `<meta content="width=device-width"name=viewport><meta content="text/html; charset=UTF-8"http-equiv=Content-Type><table style="width:100%!important;height:100%;background-color:#fafafa;padding:20px;font-family:"Helvetica Neue",Helvetica,Helvetica,Arial,"Lucida Grande",sans-serif;font-size:100%;line-height:1.6"bgcolor=#fafafa><tr><td><td bgcolor=#FFFFFF style="border:1px solid #eee;background-color:#fff;border-radius:5px;display:block!important;max-width:600px!important;margin:0 auto!important;clear:both!important"><div style="padding:20px;max-width:600px;margin:0 auto;display:block"><table style=width:100%><tr><td><p style="text-align:center;display:block;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #ddd"><img height="78" src="https://www.cleaverprojects.com/img/logo.png"><h1 style="font-weight:200;font-size:36px;margin:20px 0 30px 0;color:#333">Details...</h1><p style=margin-bottom:10px;font-weight:400;font-size:16px;color:#333>${message}<h2 style="font-weight:200;font-size:16px;margin:20px 0;color:#333">Name: ${name}</h2><h2 style="font-weight:200;font-size:16px;margin:20px 0;color:#333">Email: ${email}</h2><p style="text-align:center;display:block;padding-top:20px;font-weight:700;margin-top:30px;color:#666;border-top:1px solid #ddd">Cleaver Projects</table></div><td></table>`,
+      from: `"${name}" <${email}>`, // Sender info
+      to: "info@cleverproject.lk", // Recipient email
+      subject: `New Contact Form Submission from ${name}`,
+      text: `You received a new message from ${name} (${email}):\n\n${message}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px; background: #f9f9f9;">
+          <h2 style="color: #105EEA; text-align: center;">New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${email}" style="color: #105EEA;">${email}</a></p>
+          <p><strong>Message:</strong></p>
+          <p style="background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">${message}</p>
+          <hr>
+          <p style="text-align: center; color: #666;">This email was sent from the contact form on <strong>Clever Projects</strong>.</p>
+        </div>
+      `,
     });
-    return res.status(200).json({ msg: ["success"] });
+
+    return res.status(200).json({ msg: "Email sent successfully!" });
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ msg: error.message });
+    console.error("Email send error:", error);
+    return res.status(500).json({ msg: "Failed to send email", error: error.message });
   }
 }
