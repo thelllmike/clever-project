@@ -28,11 +28,37 @@ export default function App({ Component, pageProps, router }) {
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="4QlFs4MXSaMUGu461bl5U01tLvnfKJWi5yOwh0ha2ew" />
 
+        {/* Zoho Site Verification */}
+        <meta name="zoho-verification" content="zb97515608.zmverify.zoho.com" />
+
+        {/* Website Title and Description */}
+        <title>Clever Projects | AI & Blockchain Solutions</title>
+        <meta name="description" content="Clever Project provides cutting-edge AI, blockchain, and software development solutions for businesses worldwide." />
+        <meta name="keywords" content="Clever Projects, AI development, blockchain solutions, software development, Next.js, portfolio" />
+        <meta name="author" content="Clever Projects Team" />
+        <meta name="robots" content="index, follow" />
+
         {/* Favicon Links */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-        {/* Structured Data for Contact Information */}
+        {/* Open Graph Meta for Social Media Sharing */}
+        <meta property="og:title" content="Clever Projects | AI & Blockchain Solutions" />
+        <meta property="og:description" content="Clever Project provides AI, blockchain, and software solutions for businesses worldwide." />
+        <meta property="og:image" content="https://www.cleverproject.lk/logo.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta property="og:url" content="https://www.cleverproject.lk" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card for Sharing */}
+        <meta name="twitter:title" content="Clever Projects | AI & Blockchain Solutions" />
+        <meta name="twitter:description" content="We provide AI, blockchain, and software solutions for businesses worldwide." />
+        <meta name="twitter:image" content="https://www.cleverproject.lk/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/* Structured Data (Schema.org) for Google SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
