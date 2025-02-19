@@ -2,23 +2,22 @@
 import { transporter, mailOptions } from "../../../Context/nodemailer";
 
 export default async function handler(req, res) {
-  // Only allow POST method
   if (req.method !== "POST") {
     return res.status(405).json({ msg: "Method not allowed" });
   }
 
   const { name, message, email } = req.body;
 
-  // Validate request data
   if (!name || !message || !email || message.trim() === "") {
     return res.status(400).json({ msg: "Invalid request data" });
   }
 
   try {
-    // Send email to info@cleverproject.lk
+    // Send email using Zoho SMTP
     await transporter.sendMail({
-      from: `"${name}" <${email}>`, // Sender info
-      to: "info@cleverproject.lk", // Recipient email
+      from: `"${name}" <info@cleverproject.lk>`, // ✅ Use your Zoho Mail
+      replyTo: email, // ✅ Allows receiving replies from users
+      to: "info@cleverproject.lk", // ✅ Recipient email (Zoho Mail)
       subject: `New Contact Form Submission from ${name}`,
       text: `You received a new message from ${name} (${email}):\n\n${message}`,
       html: `
