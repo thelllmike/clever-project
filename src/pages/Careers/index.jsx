@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+// pages/careers.js
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import { motion as m } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +17,12 @@ import { useDropzone } from "react-dropzone";
 import { FooterMin } from "@/components/FooterMin";
 import Cover from "@/components/transition";
 
-// --- Hard-coded jobs for demonstration ---
+// Dynamically import the animated heading so it renders only on the client.
+const AnimatedHeading = dynamic(() => import("@/components/AnimatedHeading"), {
+  ssr: false,
+});
+
+// Hard-coded jobs for demonstration
 const jobs = [
   {
     id: "1",
@@ -45,30 +51,6 @@ const jobs = [
 ];
 
 const Careers = () => {
-  // Simple framer-motion text animation config
-  const textAnim = {
-    hidden: (custom) => ({
-      y: "110%",
-      rotateZ: 10,
-      opacity: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.85, 0, 0.15, 1],
-        delay: custom * 0.075,
-      },
-    }),
-    visible: (custom) => ({
-      y: "0%",
-      rotateZ: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.85, 0, 0.15, 1],
-        delay: custom * 0.075,
-      },
-    }),
-  };
-
   return (
     <>
       <Head>
@@ -77,79 +59,8 @@ const Careers = () => {
       </Head>
       <Cover>
         <div className="flex-col justify-center gap-8 md:gap-12">
-          {/* Page Header */}
           <div className="relative mx-auto flex flex-col items-center gap-6 px-6 text-center md:gap-10 xl:max-w-[1320px] xl:p-0">
-            <div className="flex flex-col flex-wrap">
-              <h1 className="flex flex-wrap justify-center overflow-hidden text-[40px] font-bold uppercase leading-none lg:text-[4vw]">
-                <m.span
-                  className="inline-block w-fit overflow-hidden"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={1}
-                >
-                  Grow&nbsp;
-                </m.span>
-                <m.span
-                  className="inline-block w-fit overflow-hidden"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={2}
-                >
-                  Your&nbsp;
-                </m.span>
-                <m.span
-                  className="inline-block w-fit overflow-hidden"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={3}
-                >
-                  Career&nbsp;
-                </m.span>
-                <m.span
-                  className="inline-block w-fit overflow-hidden"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={4}
-                >
-                  with
-                </m.span>
-              </h1>
-              <h1 className="flex flex-wrap justify-center overflow-hidden text-[40px] font-bold uppercase leading-none lg:text-[4vw]">
-                <m.span
-                  className="inline-block w-fit overflow-hidden"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={5}
-                >
-                  Our&nbsp;
-                </m.span>
-                <m.span
-                  className="w-fit overflow-hidden text-clever-purple"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={6}
-                >
-                  Digital&nbsp;
-                </m.span>
-                <m.span
-                  className="w-fit overflow-hidden text-clever-purple"
-                  variants={textAnim}
-                  initial="hidden"
-                  animate="visible"
-                  custom={7}
-                >
-                  Wizards!
-                </m.span>
-              </h1>
-            </div>
-
-            {/* Render each job card */}
+            <AnimatedHeading />
             {jobs.map((job) => (
               <CareerCard
                 key={job.id}
@@ -169,44 +80,43 @@ const Careers = () => {
 
 export default Careers;
 
-// Individual Card
 export const CareerCard = ({
   jobTitle,
   workType,
   workLocation,
   description,
 }) => {
-  // Resume dropzone
+  // This flag ensures we render client-only parts after mount.
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Use react-dropzone only on client
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
-  // We keep track of user input for the form
+  // Form state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
   });
-  // For showing submission status & messages
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
 
-  // On input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // On form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-
-    // If user didn't upload a resume, show an error
     if (acceptedFiles.length === 0) {
       setMessage("Please upload your resume before applying.");
       return;
     }
-
     setSubmitting(true);
     try {
       const data = new FormData();
@@ -215,18 +125,15 @@ export const CareerCard = ({
       data.append("lastName", formData.lastName);
       data.append("email", formData.email);
       data.append("phone", formData.phone);
-      data.append("resume", acceptedFiles[0]); // The first (and only) file
+      data.append("resume", acceptedFiles[0]);
 
-      // POST to /api/apply
       const res = await fetch("/api/apply", {
         method: "POST",
         body: data,
       });
       const result = await res.json();
-
       if (res.ok) {
         setMessage("Application submitted successfully!");
-        // Optionally clear form
         setFormData({ firstName: "", lastName: "", email: "", phone: "" });
       } else {
         setMessage(result.msg || "Submission failed.");
@@ -238,10 +145,9 @@ export const CareerCard = ({
     setSubmitting(false);
   };
 
-  // Display the uploaded file info (if any)
   const files = acceptedFiles.map((file) => (
     <div className="flex items-center gap-2" key={file.path}>
-      <i className="uil uil-file-alt text-lg"></i>
+      <i className="uil uil-file-alt text-lg" />
       <h6 className="mt-1 leading-none">
         {file.name} {(file.size / 1000000).toFixed(2)} MB
       </h6>
@@ -265,12 +171,12 @@ export const CareerCard = ({
           <div className="flex flex-col items-center gap-1 md:flex-row md:gap-6">
             <button className="flex items-center gap-2">
               <p className="text-sm md:text-base">Share</p>
-              <i className="uil uil-share-alt"></i>
+              <i className="uil uil-share-alt" />
             </button>
             <DialogTrigger asChild>
               <button className="flex items-center gap-2">
                 <p className="text-sm md:text-base">Apply</p>
-                <i className="uil uil-arrow-right"></i>
+                <i className="uil uil-arrow-right" />
               </button>
             </DialogTrigger>
           </div>
@@ -280,9 +186,9 @@ export const CareerCard = ({
         </div>
       </div>
 
-      {/* Dialog with the Form */}
+      {/* Application Dialog */}
       <DialogContent
-        className="max-h-[80vh] max-w-[90vw] gap-6 overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:max-h-[80vh] md:p-6 xl:max-w-[900px]"
+        className="h-[90vh] w-[95vw] overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:h-auto md:max-h-[80vh] md:max-w-[900px] md:p-6"
         hideCloseButton={true}
       >
         <DialogHeader className="flex flex-col items-start gap-2">
@@ -299,7 +205,7 @@ export const CareerCard = ({
             <div className="flex items-center gap-6">
               <button className="flex items-center gap-2">
                 <p className="text-sm md:text-base">Share</p>
-                <i className="uil uil-share-alt"></i>
+                <i className="uil uil-share-alt" />
               </button>
             </div>
           </DialogTitle>
@@ -308,7 +214,6 @@ export const CareerCard = ({
           </DialogDescription>
         </DialogHeader>
 
-        {/* The application form */}
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
           <Input
             type="text"
@@ -316,7 +221,7 @@ export const CareerCard = ({
             placeholder="First Name"
             value={formData.firstName}
             onChange={handleInputChange}
-            className="h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
+            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
           />
           <Input
             type="text"
@@ -324,7 +229,7 @@ export const CareerCard = ({
             placeholder="Last Name"
             value={formData.lastName}
             onChange={handleInputChange}
-            className="h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
+            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
           />
           <Input
             type="email"
@@ -332,7 +237,7 @@ export const CareerCard = ({
             placeholder="Email"
             value={formData.email}
             onChange={handleInputChange}
-            className="h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
+            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
           />
           <Input
             type="tel"
@@ -340,40 +245,41 @@ export const CareerCard = ({
             placeholder="Phone Number"
             value={formData.phone}
             onChange={handleInputChange}
-            className="h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
+            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
           />
 
           {/* Resume Upload Section */}
-          <div className="flex w-full flex-col gap-2">
-            {/* If NO file uploaded yet, show the dropzone */}
-            {acceptedFiles.length === 0 && (
-              <div
-                {...getRootProps({
-                  className:
-                    "dropzone flex cursor-pointer flex-col gap-2 items-center justify-center w-full border border-clever-black rounded-lg px-6 py-4",
-                })}
-              >
-                <input {...getInputProps()} />
-                <i className="uil uil-file-upload text-3xl"></i>
-                <p className="w-fit">Drag or Click here to add your CV</p>
-              </div>
-            )}
+          {isMounted && (
+            <div className="flex w-full flex-col gap-2">
+              {acceptedFiles.length === 0 ? (
+                <div
+                  {...getRootProps({
+                    className:
+                      "dropzone flex cursor-pointer flex-col gap-2 items-center justify-center w-full border border-clever-black rounded-lg px-6 py-4",
+                  })}
+                >
+                  <input {...getInputProps()} />
+                  <i className="uil uil-file-upload text-3xl" />
+                  <p className="w-fit">Drag or Click here to add your CV</p>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-2 border border-clever-black rounded-lg px-6 py-4">
+                  {files}
+                  <p className="text-green-600">Resume Uploaded Successfully!</p>
+                </div>
+              )}
+            </div>
+          )}
 
-            {/* If file IS uploaded, hide dropzone and show file info */}
-            {acceptedFiles.length > 0 && (
-              <div className="flex flex-col items-center gap-2 border border-clever-black rounded-lg px-6 py-4">
-                {files}
-                <p className="text-green-600">Resume Uploaded Successfully!</p>
-              </div>
-            )}
-          </div>
-
+          {/* Mobile Responsive Apply Button */}
           <DialogFooter className="flex w-full flex-row justify-center sm:justify-center mt-2">
-            <Button
+            <button
               type="submit"
-              text={submitting ? "Submitting..." : "Apply"}
-              className="px-6 py-4 text-base md:px-8 md:py-4 md:text-base"
-            />
+              disabled={submitting}
+              className="w-full md:w-auto px-6 py-4 text-base md:px-8 md:py-4 md:text-base text-white bg-clever-purple hover:bg-clever-purple/90 transition-colors rounded-md font-semibold"
+            >
+              {submitting ? "Submitting..." : "Apply"}
+            </button>
           </DialogFooter>
           {message && <p className="text-center mt-2">{message}</p>}
         </form>
@@ -382,7 +288,6 @@ export const CareerCard = ({
   );
 };
 
-// A small reusable Badge component for Full-Time/Part-Time & Remote/Onsite
 export function CleaverBadge({ children }) {
   return (
     <div className="flex items-center rounded-md border border-clever-black px-2 py-1 text-clever-black">
