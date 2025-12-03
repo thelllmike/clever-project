@@ -36,9 +36,7 @@ export default function Home() {
       </Head>
 
       <Cover>
-        <main className="relative h-screen w-screen">
-          <Scence />
-        </main>
+        <Scence />
       </Cover>
     </>
   );

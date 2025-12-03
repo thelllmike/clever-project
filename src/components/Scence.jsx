@@ -92,7 +92,10 @@ const Scene = () => {
             intensity={3}
             position={[2, 6, 3]}
           />
-          <Environment preset="city" />
+      {/* Environment HDR preset removed to avoid fetch error when HDR assets are not present in /public.
+        To re-enable, add the required .hdr files to public and uncomment the line below, or
+        provide a valid URL via the `files` prop: <Environment files={'/hdr/potsdamer_platz_1k.hdr'} /> */}
+      {/* <Environment preset="city" /> */}
           {/* <OrbitControls /> */}
           <Brain theatreKey="Brain" />
           <ScrollAnimation />
