@@ -10,13 +10,14 @@ export const config = {
   },
 };
 
+const port = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 465;
 const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
-  port: 465,
-  secure: true,
+  host: process.env.EMAIL_HOST,
+  port: port,
+  secure: port === 465, // use SSL for port 465
   auth: {
-    user: process.env.ZOHO_EMAIL, // e.g. info@cleverproject.lk
-    pass: process.env.ZOHO_PASSWORD, // e.g. your app-specific password if needed
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
@@ -25,54 +26,88 @@ export default async function handler(req, res) {
     return res.status(405).json({ msg: "Method not allowed" });
   }
 
-  const form = new IncomingForm(); // Use the directly imported IncomingForm
+  const form = new IncomingForm();
   form.parse(req, async (err, fields, files) => {
     if (err) {
-      console.error("Error parsing form data:", err);
+      console.error("Form parse error:", err);
       return res.status(500).json({ msg: "Form parsing error" });
     }
 
-    console.log("Parsed fields:", fields);
-    console.log("Parsed files:", files);
+    // Normalize fields (Formidable sometimes returns arrays)
+    const jobTitle = Array.isArray(fields.jobTitle) ? fields.jobTitle[0] : fields.jobTitle || "";
+    const firstName = Array.isArray(fields.firstName) ? fields.firstName[0] : fields.firstName || "";
+    const lastName = Array.isArray(fields.lastName) ? fields.lastName[0] : fields.lastName || "";
+    const email = Array.isArray(fields.email) ? fields.email[0] : fields.email || "";
+    const phone = Array.isArray(fields.phone) ? fields.phone[0] : fields.phone || "";
 
-    const { jobTitle, firstName, lastName, email, phone } = fields;
-    if (!jobTitle || !firstName || !lastName || !email || !phone) {
-      return res.status(400).json({ msg: "Missing required fields" });
-    }
-
-    let attachment = null;
-    if (files.resume) {
-      // If multiple files, pick the first one
-      const resumeFile = Array.isArray(files.resume) ? files.resume[0] : files.resume;
-      const filePath = resumeFile.filepath || resumeFile.path;
-      if (filePath) {
-        try {
-          const fileData = fs.readFileSync(filePath);
-          attachment = {
-            filename: resumeFile.originalFilename,
-            content: fileData,
-          };
-        } catch (readErr) {
-          console.error("Error reading file:", readErr);
-        }
-      } else {
-        console.error("Resume file uploaded but no filepath found");
+    // Build attachments from uploaded files
+    const attachments = [];
+    if (files && files.resume) {
+      const resume = Array.isArray(files.resume) ? files.resume[0] : files.resume;
+      try {
+        const fileData = fs.readFileSync(resume.filepath);
+        attachments.push({
+          filename: resume.originalFilename || resume.newFilename || "resume",
+          content: fileData,
+        });
+      } catch (fsErr) {
+        console.error("Failed to read uploaded file:", fsErr);
       }
     }
 
+    const toAddress = process.env.EMAIL_TO || "piumalranepura@gmail.com";
+    const mailOptions = {
+      from: `"${firstName} ${lastName}" <${process.env.EMAIL_USER || toAddress}>`,
+      to: toAddress,
+      replyTo: email,
+      subject: `Application: ${jobTitle}`,
+      text: `New Application\n\nJob: ${jobTitle}\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}`,
+    };
+
+    if (attachments.length > 0) mailOptions.attachments = attachments;
+
+    // Helper to attempt send using a transporter
+    const trySendWithTransporter = async (transport) => {
+      return transport.sendMail(mailOptions);
+    };
+
+    // Try to send with configured transporter first, with Ethereal fallback in dev
     try {
-      await transporter.sendMail({
-        from: `"${firstName} ${lastName}" <${process.env.ZOHO_EMAIL}>`,
-        replyTo: email,
-        to: process.env.ZOHO_EMAIL,
-        subject: `Job Application for ${jobTitle} from ${firstName} ${lastName}`,
-        text: `You received a new job application for ${jobTitle}.\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}`,
-        attachments: attachment ? [attachment] : [],
-      });
-      res.status(200).json({ msg: "Application submitted successfully!" });
+      try {
+        const info = await trySendWithTransporter(transporter);
+        console.log("Email sent:", info && info.messageId ? info.messageId : info);
+        return res.status(200).json({ msg: "Sent successfully" });
+      } catch (sendErr) {
+        console.error("Email send fail:", sendErr);
+
+        if (process.env.NODE_ENV !== "production") {
+          try {
+            const testAccount = await nodemailer.createTestAccount();
+            const testTransporter = nodemailer.createTransport({
+              host: testAccount.smtp.host,
+              port: testAccount.smtp.port,
+              secure: testAccount.smtp.secure,
+              auth: {
+                user: testAccount.user,
+                pass: testAccount.pass,
+              },
+            });
+
+            const info = await trySendWithTransporter(testTransporter);
+            const previewUrl = nodemailer.getTestMessageUrl(info);
+            console.log("Ethereal preview URL:", previewUrl);
+            return res.status(200).json({ msg: "Sent in dev (ethereal)", previewUrl });
+          } catch (ethErr) {
+            console.error("Ethereal send fail:", ethErr);
+            return res.status(500).json({ msg: "Email send failed (dev fallback)" });
+          }
+        }
+
+        return res.status(500).json({ msg: "Email send failed" });
+      }
     } catch (error) {
-      console.error("Email send error:", error);
-      res.status(500).json({ msg: "Failed to send email", error: error.message });
+      console.error("Unexpected error sending email:", error);
+      return res.status(500).json({ msg: "Email send failed" });
     }
   });
 }
