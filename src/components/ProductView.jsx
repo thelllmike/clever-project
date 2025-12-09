@@ -66,7 +66,7 @@ const ProductView = ({ name, img1, img2, img3, description, link, videoUrl }) =>
         </div>
 
         
-        <p className="mt-2">{description}</p>
+        <p className="mt-2 p-2">{description}</p>
 
         
         <div className="flex justify-center">

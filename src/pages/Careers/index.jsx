@@ -110,39 +110,82 @@ export const CareerCard = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Converts a File to base64 (without the data:... prefix)
+  const fileToBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file); // gives "data:application/pdf;base64,AAAA..."
+      reader.onload = () => {
+        const result = reader.result || "";
+        const base64 = result.split(",")[1]; // remove "data:...;base64,"
+        resolve(base64);
+      };
+      reader.onerror = (error) => reject(error);
+    });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+
     if (acceptedFiles.length === 0) {
       setMessage("Please upload your resume before applying.");
       return;
     }
+
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.email.trim()
+    ) {
+      setMessage("Please fill in all required fields.");
+      return;
+    }
+
     setSubmitting(true);
+
     try {
-      const data = new FormData();
-      data.append("jobTitle", jobTitle);
-      data.append("firstName", formData.firstName);
-      data.append("lastName", formData.lastName);
-      data.append("email", formData.email);
-      data.append("phone", formData.phone);
-      data.append("resume", acceptedFiles[0]);
+      const resumeFile = acceptedFiles[0];
+
+      // convert file to base64
+      const resumeBase64 = await fileToBase64(resumeFile);
+
+      const payload = {
+        jobTitle,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        resume: {
+          name: resumeFile.name,
+          type: resumeFile.type,
+          size: resumeFile.size,
+          content: resumeBase64, // base64 string
+        },
+      };
 
       const res = await fetch("/api/apply", {
         method: "POST",
-        body: data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
+
       const result = await res.json();
+
       if (res.ok) {
-        setMessage("Application submitted successfully!");
+        setMessage("Application submitted & emailed successfully!");
         setFormData({ firstName: "", lastName: "", email: "", phone: "" });
+        // Optional: reset dropzone (may need to implement with useDropzone callback)
       } else {
         setMessage(result.msg || "Submission failed.");
       }
     } catch (error) {
       console.error(error);
       setMessage("An error occurred while submitting.");
+    } finally {
+      setSubmitting(false);
     }
-    setSubmitting(false);
   };
 
   const files = acceptedFiles.map((file) => (
@@ -188,7 +231,7 @@ export const CareerCard = ({
 
       {/* Application Dialog */}
       <DialogContent
-        className="h-[90vh] w-[95vw] overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:h-auto md:max-h-[80vh] md:max-w-[900px] md:p-6"
+        className="h-[95vh] w-[95vw] overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:h-auto md:max-h-[90vh] md:max-w-[1000px] md:p-6"
         hideCloseButton={true}
       >
         <DialogHeader className="flex flex-col items-start gap-2">
@@ -214,7 +257,7 @@ export const CareerCard = ({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4 pb-4">
           <Input
             type="text"
             name="firstName"
