@@ -4,7 +4,9 @@ import Image from "next/image";
 import Head from "next/head";
 import { FooterMin } from "@/components/FooterMin";
 import python from "../../../public/images/languages/python-original.svg";
-import Cover from "@/components/transition";
+// Note: avoid wrapping this page with the client-only `Cover` component
+// to prevent server/client hydration mismatches.
+import ProductView from "@/components/ProductView";
 
 const ProjectsPage = () => {
   return (
@@ -13,23 +15,23 @@ const ProjectsPage = () => {
         <title>Projects</title>
         <meta name="description" content="Contact page" />
       </Head>
-      <Cover>
         <div className="mt-[115px] flex h-full flex-col items-center justify-center gap-8 md:gap-12 lg:mt-[150px]">
           <div className="flex w-full max-w-[1320px] flex-col items-center justify-center gap-6 px-6 sm:mx-auto md:gap-10 lg:p-0">
             <iframe
               className="aspect-video w-full"
               src="https://www.youtube.com/embed/1UJp7SipkNE?si=BZiCPmpIbbKE4uCF"
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
             <div className="flex w-full flex-col items-center gap-8">
               <h1 className="text-2xl text-clever-gray-light lg:text-4xl">
                 Projects
               </h1>
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-14 lg:grid-cols-3">
+                {/* <ProjectsCard />
                 <ProjectsCard />
                 <ProjectsCard />
                 <ProjectsCard />
@@ -38,14 +40,16 @@ const ProjectsPage = () => {
                 <ProjectsCard />
                 <ProjectsCard />
                 <ProjectsCard />
-                <ProjectsCard />
-                <ProjectsCard />
+                <ProjectsCard /> */}
+                
+                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://youtu.be/nfibyKEB6io" />
+                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://www.youtube.com/watch?v=McluqmRIvjs" />
+                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://youtu.be/nfibyKEB6io" />
               </div>
             </div>
           </div>
         </div>
         <FooterMin />
-      </Cover>
     </>
   );
 };

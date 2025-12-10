@@ -1,3 +1,5 @@
+"use client";
+
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";

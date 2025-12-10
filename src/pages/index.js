@@ -1,7 +1,7 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Cover from "@/components/transition";
+// Cover transition removed from Home to avoid hydration mismatch
 
 const Scence = dynamic(() => import("../components/Scence"), {
   ssr: false,
@@ -35,11 +35,9 @@ export default function Home() {
         {/* <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" /> */}
       </Head>
 
-      <Cover>
-        <main className="relative h-screen w-screen">
-          <Scence />
-        </main>
-      </Cover>
+      <main className="relative h-screen w-screen">
+        <Scence />
+      </main>
     </>
   );
 }

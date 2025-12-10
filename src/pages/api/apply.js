@@ -1,78 +1,65 @@
 // pages/api/apply.js
-import nodemailer from "nodemailer";
-import { IncomingForm } from "formidable"; // Import the constructor directly
-import fs from "fs";
-
-// Disable Next.js body parsing so that formidable can handle incoming form-data
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.ZOHO_EMAIL, // e.g. info@cleverproject.lk
-    pass: process.env.ZOHO_PASSWORD, // e.g. your app-specific password if needed
-  },
-});
+import { transporter, mailOptions } from "@/lib/nodemailer";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ msg: "Method not allowed" });
   }
 
-  const form = new IncomingForm(); // Use the directly imported IncomingForm
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      console.error("Error parsing form data:", err);
-      return res.status(500).json({ msg: "Form parsing error" });
+  try {
+    const {
+      jobTitle,
+      firstName,
+      lastName,
+      email,
+      phone,
+      resume, // resume: { name, type, size, content (base64) }
+    } = req.body;
+
+    // Basic validation
+    if (!jobTitle || !firstName || !lastName || !email || !resume?.content) {
+      return res.status(400).json({ msg: "Missing required fields." });
     }
 
-    console.log("Parsed fields:", fields);
-    console.log("Parsed files:", files);
+    const fullName = `${firstName} ${lastName}`.trim();
 
-    const { jobTitle, firstName, lastName, email, phone } = fields;
-    if (!jobTitle || !firstName || !lastName || !email || !phone) {
-      return res.status(400).json({ msg: "Missing required fields" });
-    }
+    await transporter.sendMail({
+      ...mailOptions,
+      to: "info@cleverproject.lk", // where we receive all applications
+      subject: `New Job Application: ${jobTitle} - ${fullName}`,
+      text: `
+New job application received.
 
-    let attachment = null;
-    if (files.resume) {
-      // If multiple files, pick the first one
-      const resumeFile = Array.isArray(files.resume) ? files.resume[0] : files.resume;
-      const filePath = resumeFile.filepath || resumeFile.path;
-      if (filePath) {
-        try {
-          const fileData = fs.readFileSync(filePath);
-          attachment = {
-            filename: resumeFile.originalFilename,
-            content: fileData,
-          };
-        } catch (readErr) {
-          console.error("Error reading file:", readErr);
-        }
-      } else {
-        console.error("Resume file uploaded but no filepath found");
-      }
-    }
+Job Title: ${jobTitle}
+Name: ${fullName}
+Email: ${email}
+Phone: ${phone}
 
-    try {
-      await transporter.sendMail({
-        from: `"${firstName} ${lastName}" <${process.env.ZOHO_EMAIL}>`,
-        replyTo: email,
-        to: process.env.ZOHO_EMAIL,
-        subject: `Job Application for ${jobTitle} from ${firstName} ${lastName}`,
-        text: `You received a new job application for ${jobTitle}.\n\nName: ${firstName} ${lastName}\nEmail: ${email}\nPhone: ${phone}`,
-        attachments: attachment ? [attachment] : [],
-      });
-      res.status(200).json({ msg: "Application submitted successfully!" });
-    } catch (error) {
-      console.error("Email send error:", error);
-      res.status(500).json({ msg: "Failed to send email", error: error.message });
-    }
-  });
+Check the attached resume file.
+      `.trim(),
+      html: `
+        <h2>New Job Application</h2>
+        <p><strong>Job Title:</strong> ${jobTitle}</p>
+        <p><strong>Name:</strong> ${fullName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p>Resume is attached to this email.</p>
+      `,
+      attachments: [
+        {
+          filename: resume.name || "resume.pdf",
+          content: resume.content, // base64 content
+          encoding: "base64",
+          contentType: resume.type || "application/octet-stream",
+        },
+      ],
+    });
+
+    return res
+      .status(200)
+      .json({ msg: "Application emailed successfully." });
+  } catch (err) {
+    console.error("Error sending application email:", err);
+    return res.status(500).json({ msg: "Failed to send email." });
+  }
 }
