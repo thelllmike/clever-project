@@ -3,10 +3,32 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ProductView = ({ name, img1, img2, img3, description, link, videoUrl }) => {
   
-  // Extract YouTube ID
+  // Extract YouTube ID from various URL formats
   const getVideoId = (url) => {
-    const params = new URLSearchParams(new URL(url).search);
-    return params.get("v");
+    if (!url) return null;
+    
+    try {
+      // Handle youtu.be short links
+      if (url.includes("youtu.be/")) {
+        return url.split("youtu.be/")[1]?.split("?")[0] || null;
+      }
+      
+      // Handle youtube.com full links
+      if (url.includes("youtube.com")) {
+        const params = new URLSearchParams(new URL(url).search);
+        return params.get("v");
+      }
+      
+      // Handle direct video IDs (11 character alphanumeric strings)
+      if (url.match(/^[a-zA-Z0-9_-]{11}$/)) {
+        return url;
+      }
+      
+      return null;
+    } catch (error) {
+      console.warn("Invalid YouTube URL:", url, error);
+      return null;
+    }
   };
 
   const videoId = videoUrl ? getVideoId(videoUrl) : null;
@@ -36,45 +58,56 @@ const ProductView = ({ name, img1, img2, img3, description, link, videoUrl }) =>
   };
 
   return (
-    <div className="m-1 ">
-      <div className="flex flex-col border border-white  rounded-lg w-[450px] h-[450px]">
-        <div className="p-2">
-        <h2 className="text-lg font-semibold">{name}</h2>
-       </div>
-        
-        <div className="relative w-full flex items-center justify-center">
+    <div className="m-1">
+      <div className="flex flex-col border border-white rounded-lg w-[450px] h-[500px] bg-gradient-to-b from-transparent to-black/60 overflow-hidden relative group">
+        {/* Image/Video with Carousel Controls */}
+        <div className="relative w-full h-[350px] flex items-center justify-center bg-black/40">
           <img
             src={images[index].src}
             alt={`${name} image ${index + 1}`}
-            className={`w-[450px] h-[240px] ${images[index].type === "video" ? "cursor-pointer" : ""}`}
+            className={`w-full h-full object-cover ${images[index].type === "video" ? "cursor-pointer hover:opacity-80 transition-opacity" : ""}`}
             onClick={openVideo}
           />
 
+          {/* Navigation Arrows */}
           <button
             onClick={prevImage}
-            className="absolute left-2 p-2 rounded-lg"
+            className="absolute left-2 p-2 rounded-lg bg-white/20 hover:bg-white/40 transition-colors"
+            aria-label="Previous image"
           >
-            <FaArrowLeft />
+            <FaArrowLeft className="text-white" />
           </button>
 
           <button
             onClick={nextImage}
-            className="absolute right-2 p-2 rounded-lg"
+            className="absolute right-2 p-2 rounded-lg bg-white/20 hover:bg-white/40 transition-colors"
+            aria-label="Next image"
           >
-            <FaArrowRight />
+            <FaArrowRight className="text-white" />
           </button>
+
+          {/* Image Counter */}
+          <div className="absolute bottom-2 right-2 bg-black/60 text-white px-2 py-1 rounded text-xs">
+            {index + 1}/{images.length}
+          </div>
         </div>
 
-        
-        <p className="mt-2 p-2">{description}</p>
+        {/* Card Content Overlay */}
+        <div className="flex flex-col justify-between flex-1 p-4 text-white">
+          {/* Title */}
+          <div>
+            <h2 className="text-xl font-bold mb-2 line-clamp-2">{name}</h2>
 
-        
-        <div className="flex justify-center">
+            {/* Description */}
+            <p className="text-sm text-gray-300 line-clamp-3">{description}</p>
+          </div>
+
+          {/* View Project Button */}
           <a
             href={link}
-            className="px-6 py-2 border border-purple-500 rounded-full bg-[#2a2340] text-white text-[20px] hover:bg-purple-500 hover:text-white transition-all duration-300"
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full px-4 py-2 border border-purple-500 rounded-full bg-purple-600/30 text-white font-semibold hover:bg-purple-600 hover:border-purple-400 transition-all duration-300 text-center text-sm"
           >
             View Project
           </a>

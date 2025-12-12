@@ -42,9 +42,55 @@ const ProjectsPage = () => {
                 <ProjectsCard />
                 <ProjectsCard /> */}
                 
-                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://youtu.be/nfibyKEB6io" />
-                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://www.youtube.com/watch?v=McluqmRIvjs" />
-                <ProductView name="Product 1" img1="/img/i1.png" img2="/img/i2.png" img3="/img/i3.png" description="Description for Product 1" link="/products/product-1" videoUrl="https://youtu.be/nfibyKEB6io" />
+               <ProductView 
+  name="Handmade Soap Online Store – WordPress WooCommerce"
+  description="I designed and developed a fully functional Handmade Soap Ecommerce Store using WordPress and WooCommerce. The project included custom theme styling, product page optimization, mobile-responsive layouts, and a complete checkout flow with secure payment integration. I focused on a clean natural brand look while improving UX, speed, and conversions."
+  link="#"
+  videoUrl="https://youtu.be/nfibyKEB6io"
+/>
+
+<ProductView 
+  name="XCP-ng Virtualization Platform Deployment on VMware Workstation"
+  description="I deployed a full virtualization environment by installing XCP-ng as a nested hypervisor inside VMware Workstation Pro. Includes configuration, XOA setup, storage repositories, ISO imports, VM creation, networking validation, and snapshots. Demonstrates enterprise-grade virtualization and documentation skills."
+  link="#"
+  videoUrl="https://www.youtube.com/watch?v=qaWzAVCt0W0"
+/>
+
+<ProductView 
+  name="tvOS Game Prototype Development (SwiftUI | Apple TV Game)"
+  description="A mini-game built with clean SwiftUI architecture including Apple TV remote support, smooth animations, game logic, timer, score, winner screen, and celebration effects. Ready for TestFlight and ideal for prototypes, university projects, and entertainment apps."
+  link="#"
+  videoUrl="https://freelancerprofilenuxt.mesh.prod.platform.usw2.upwork/freelancers/~01a953c0b6e3acd5b5?p=1991087789414068224"
+/>
+
+<ProductView 
+  name="RaveUp – Data-Driven Race Predictions Platform"
+  description="RaveUp predicts race outcomes using historical pace data. Includes driver profiles, race registration, live-updating predictions, organizer dashboards, and event management. Platform becomes smarter with every lap."
+  link="#"
+  videoUrl="https://freelancerprofilenuxt.mesh.prod.platform.usw2.upwork/freelancers/~01a953c0b6e3acd5b5?p=1988548906391855104"
+/>
+
+<ProductView 
+  name="GlowMatch – Smart Salon App"
+  description="GlowMatch recommends salons using real reviews. Features selfie-based shade matching, beauty profile recommendations, instant bookings, routines, deals, and photo reviews for makeup and non-medical skincare."
+  link="#"
+  videoUrl="https://www.youtube.com/watch?v=Yp8ikaL80qU"
+/>
+
+<ProductView 
+  name="IntelliHire Analyst – AI Skill Matching System"
+  description="AI system that compares CV skills to job descriptions, generates custom interview questions, evaluates answers, highlights strengths/weaknesses, and gives a fit score. Helps candidates prepare smartly and employers hire better."
+  link="#"
+  videoUrl="https://freelancerprofilenuxt.mesh.prod.platform.usw2.upwork/freelancers/~01a953c0b6e3acd5b5?p=1987870625403158528"
+/>
+
+<ProductView 
+  name="Smart Security & Facility Management Platform"
+  description="Smart system for visitor management, QR check-ins, vehicle and parking control, incident reporting with photos, assignment workflows, and real-time monitoring. Supports security teams with automation and tracking."
+  link="#"
+  videoUrl="https://youtu.be/EamTnw6tv6s?si=rE6c0Xd5Iu85tGhn"
+/>
+
               </div>
             </div>
           </div>
