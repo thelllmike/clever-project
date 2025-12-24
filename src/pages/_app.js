@@ -7,7 +7,7 @@ import "@/styles/globals.css";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-
+import Script from "next/script"; 
 export default function App({ Component, pageProps, router }) {
   const pathname = usePathname();
 
