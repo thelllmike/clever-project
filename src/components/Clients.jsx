@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
+import { Pagination, Navigation, EffectCoverflow, Autoplay } from "swiper/modules";
 import CarouselCard from "./CarouselCard";
 
 import spotify from "../../public/images/spotify.png";
@@ -164,29 +164,7 @@ const Clients = () => {
             <div className="absolute right-0 top-0 z-[2] hidden h-full w-[20vw] bg-gradient-to-l from-clever-black from-0% via-clever-black to-transparent to-80% md:block"></div>
           </div>
         </div>
-        <div className="flex flex-col gap-8 lg:flex-row">
-          <Image
-            src={spotify}
-            className="h-14 w-auto"
-            alt="Spotify"
-            height={56}
-            width={175}
-          />
-          <Image
-            src={google}
-            className="h-14 w-auto"
-            alt="Google"
-            height={56}
-            width={175}
-          />
-          <Image
-            src={airbnb}
-            className="h-14 w-auto"
-            alt="AirBnb"
-            height={56}
-            width={175}
-          />
-        </div>
+      
       </div>
     </>
   );

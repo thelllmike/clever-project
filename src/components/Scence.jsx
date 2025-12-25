@@ -4,6 +4,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import WhatsAppFloat from "./WhatsAppFloat";
+import HoverImageLinks from "@/components/HoverImageLinks";
 import {
   Environment,
   OrbitControls,
@@ -83,27 +84,15 @@ const Scene = () => {
     <MouseFollower />
 
     <Canvas>
-      <ScrollControls pages={6} damping={0.3}>
+      <ScrollControls pages={7} damping={0.3}>
         <SheetProvider sheet={sheet}>
-          {/* <PerspectiveCamera
-            theatreKey="Main Camera"
-            makeDefault
-            position={[0, 0, 16]}
-            fov={20}
-            near={0.1}
-            far={1000}
-          />
-          <e.directionalLight
-            theatreKey="main light"
-            intensity={3}
-            position={[2, 6, 3]}
-          /> */}
-
+        
           <ScrollAnimation />
           <Scroll html>
             <Hero />
             <Feilds scrollOffset={scrollOffset} />
             <About />
+             <HoverImageLinks />
             <Clients />
             <Footer />
           </Scroll>
