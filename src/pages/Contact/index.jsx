@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Button from "@/components/Button";
 import { FooterMin } from "@/components/FooterMin";
 import { Dialog } from "@radix-ui/react-dialog";
+import MouseFollower from "./../../components/MouseFollower";
 import {
   DialogContent,
   DialogDescription,
@@ -113,6 +114,7 @@ const ContactPage = () => {
         <meta name="description" content="Contact page" />
       </Head>
       <Cover>
+         <MouseFollower />
         <div className="flex flex-col justify-center gap-8 md:gap-12">
           <div className="relative flex flex-col items-center gap-6 px-6 text-center sm:mx-auto sm:max-w-[640px] md:gap-10 lg:p-0">
             <div className="flex flex-col flex-wrap">

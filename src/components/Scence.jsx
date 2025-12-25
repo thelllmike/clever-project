@@ -27,6 +27,7 @@ import Feilds from "./Feilds";
 import About from "./About";
 import Clients from "./Clients";
 import Footer from "./Footer";
+import MouseFollower from "./MouseFollower";
 
 import brainAnimLG from "../../public/objAnim/brainAnim-lg.json";
 import brainAnimSM from "../../public/objAnim/brainAnim-sm.json";
@@ -76,28 +77,26 @@ const Scene = () => {
   };
 
   return (
+  <div className="relative h-screen w-screen">
+    <MouseFollower />
+
     <Canvas>
       <ScrollControls pages={6} damping={0.3}>
         <SheetProvider sheet={sheet}>
-          <PerspectiveCamera
+          {/* <PerspectiveCamera
             theatreKey="Main Camera"
             makeDefault
             position={[0, 0, 16]}
-            fov={20} // Narrow FOV for less distortion in close-ups
-            near={0.1} // Small near clipping plane
+            fov={20}
+            near={0.1}
             far={1000}
           />
           <e.directionalLight
             theatreKey="main light"
             intensity={3}
             position={[2, 6, 3]}
-          />
-      {/* Environment HDR preset removed to avoid fetch error when HDR assets are not present in /public.
-        To re-enable, add the required .hdr files to public and uncomment the line below, or
-        provide a valid URL via the `files` prop: <Environment files={'/hdr/potsdamer_platz_1k.hdr'} /> */}
-      {/* <Environment preset="city" /> */}
-          {/* <OrbitControls /> */}
-          <Brain theatreKey="Brain" />
+          /> */}
+
           <ScrollAnimation />
           <Scroll html>
             <Hero />
@@ -109,7 +108,8 @@ const Scene = () => {
         </SheetProvider>
       </ScrollControls>
     </Canvas>
-  );
+  </div>
+);
 };
 
 export default Scene;

@@ -73,3 +73,10 @@ html.lenis body {
   align-items: center !important;
   display: flex !important;
 }
+
+/* Hide default cursor ONLY on desktop hover devices */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}

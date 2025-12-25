@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import MouseFollower from "./../../components/MouseFollower";
 import {
   Dialog,
   DialogContent,
@@ -58,6 +59,8 @@ const Careers = () => {
         <meta name="description" content="Careers page" />
       </Head>
       <Cover>
+        <MouseFollower />
+      
         <div className="flex-col justify-center gap-8 md:gap-12">
           <div className="relative mx-auto flex flex-col items-center gap-6 px-6 text-center md:gap-10 xl:max-w-[1320px] xl:p-0">
             <AnimatedHeading />
@@ -73,6 +76,7 @@ const Careers = () => {
           </div>
           <FooterMin />
         </div>
+        
       </Cover>
     </>
   );
