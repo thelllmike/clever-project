@@ -53,15 +53,17 @@ const Feilds = ({ scrollOffset }) => {
       <div className="z-[2] mx-auto h-full px-6 lg:h-fit lg:w-[1320px]">
         <div className="w-full max-w-none lg:max-w-[40vw]">
           <ul className="flex flex-col items-center gap-8 lg:items-start lg:gap-[6vh]">
-            {feilds.map((feild, index) => (
-              <m.li
-                key={index}
-                style={{ skewX: skewValue }}
-                className="text-center text-5xl font-bold uppercase leading-[8vh] text-clever-gray-light lg:text-start lg:text-[4vw]"
-              >
-                {feild}
-              </m.li>
-            ))}
+           {feilds.map((feild, index) => (
+  <m.li
+    key={index}
+    style={{ skewX: skewValue, transformOrigin: "center" }}
+    whileHover={{ scale: 1.08 }}
+    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    className="inline-block cursor-pointer text-center text-5xl font-bold uppercase leading-[8vh] text-clever-gray-light lg:text-start lg:text-[4vw]"
+  >
+    {feild}
+  </m.li>
+))}
           </ul>
         </div>
       </div>

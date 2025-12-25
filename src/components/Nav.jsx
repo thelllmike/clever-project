@@ -37,6 +37,47 @@ const Nav = () => {
     }
   };
 
+  const RotatingWord = ({
+  words = [
+    { text: "Project", className: "text-white" },
+    { text: "People", className: "text-clever-purple" },
+    { text: "Inovation", className: "text-clever-purple" },
+  ],
+  interval = 2200,
+}) => {
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setI((v) => (v + 1) % words.length), interval);
+    return () => clearInterval(t);
+  }, [interval, words.length]);
+
+  const current = words[i];
+  const maxLen = Math.max(...words.map((w) => w.text.length)); // longest word
+
+
+  return (
+    <span
+      className="relative inline-flex h-[1.4em] overflow-hidden align-baseline"
+      style={{ width: `${maxLen}ch` }} // FIX: keeps width constant so "Clever" won't move
+    >
+      <AnimatePresence mode="wait">
+        <m.span
+          key={current.text}
+          initial={{ rotateX: 90, y: "0.6em", opacity: 0 }}
+          animate={{ rotateX: 0, y: "0em", opacity: 1 }}
+          exit={{ rotateX: -90, y: "-0.6em", opacity: 0 }}
+          transition={{ duration: 0.45, ease: "easeInOut" }}
+          style={{ transformOrigin: "50% 50%", display: "inline-block" }}
+          className={`inline-block ${current.className}`}
+        >
+          {current.text}
+        </m.span>
+      </AnimatePresence>
+    </span>
+  );
+};
+
   const links = [
     { href: "/Contact", label: "Contact" },
     { href: "/Projects", label: "Projects" },
@@ -87,16 +128,24 @@ const Nav = () => {
             loop={false}
           />
         </button>
-        <div className="bg-clever-gray-light p-1 lg:p-[10px]">
-          <Link href="/">
-            <Image
-              src={logo}
-              alt="logo"
-              height={64}
-              width={64}
-              className="h-10 w-10 lg:h-16 lg:w-16"
-            />
-          </Link>
+        <div >
+         <Link href="/" className="flex items-center gap-3">
+  {/* optional: keep logo */}
+
+  {/* one-line text */}
+  <div className="flex items-center gap-2 text-base font-bold uppercase leading-none lg:text-xl">
+  <span className="text-white">Clever</span>
+
+  <RotatingWord
+    words={[
+      { text: "Project", className: "text-white" },
+      { text: "People", className: "text-clever-purple" },
+      { text: "Inovation", className: "text-clever-purple" },
+    ]}
+    interval={2200}
+  />
+</div>
+</Link>
         </div>
       </div>
       <AnimatePresence mode="wait">

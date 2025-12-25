@@ -2,6 +2,8 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
+import { FaWhatsapp } from "react-icons/fa";
+import WhatsAppFloat from "./WhatsAppFloat";
 import {
   Environment,
   OrbitControls,
@@ -108,6 +110,7 @@ const Scene = () => {
         </SheetProvider>
       </ScrollControls>
     </Canvas>
+            <WhatsAppFloat />
   </div>
 );
 };
