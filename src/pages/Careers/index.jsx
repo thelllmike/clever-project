@@ -13,17 +13,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/Button";
 import { useDropzone } from "react-dropzone";
 import { FooterMin } from "@/components/FooterMin";
 import Cover from "@/components/transition";
 
-// Dynamically import the animated heading so it renders only on the client.
 const AnimatedHeading = dynamic(() => import("@/components/AnimatedHeading"), {
   ssr: false,
 });
 
-// Hard-coded jobs for demonstration
 const jobs = [
   {
     id: "1",
@@ -51,61 +48,55 @@ const jobs = [
   },
 ];
 
-const Careers = () => {
+export default function Careers() {
   return (
     <>
       <Head>
         <title>Careers</title>
         <meta name="description" content="Careers page" />
       </Head>
+
       <Cover>
         <MouseFollower />
-      
-        <div className="flex-col justify-center gap-8 md:gap-12">
-          <div className="relative mx-auto flex flex-col items-center gap-6 px-6 text-center md:gap-10 xl:max-w-[1320px] xl:p-0">
-            <AnimatedHeading />
-            {jobs.map((job) => (
-              <CareerCard
-                key={job.id}
-                jobTitle={job.job_title}
-                workType={job.full_time ? "Full Time" : "Part Time"}
-                workLocation={job.remote ? "Remote" : "Onsite"}
-                description={job.description}
-              />
-            ))}
+
+        {/* ✅ IMPORTANT: push content below fixed navbar */}
+        <div className="min-h-screen pt-[90px] lg:pt-[160px]">
+          <div className="flex flex-col justify-center gap-8 md:gap-12">
+            <div className="relative mx-auto flex max-w-[1320px] flex-col items-center gap-6 px-6 text-center md:gap-10">
+              <AnimatedHeading />
+
+              {jobs.map((job) => (
+                <CareerCard
+                  key={job.id}
+                  jobTitle={job.job_title}
+                  workType={job.full_time ? "Full Time" : "Part Time"}
+                  workLocation={job.remote ? "Remote" : "Onsite"}
+                  description={job.description}
+                />
+              ))}
+            </div>
+
+            <FooterMin />
           </div>
-          <FooterMin />
         </div>
-        
       </Cover>
     </>
   );
-};
+}
 
-export default Careers;
-
-export const CareerCard = ({
-  jobTitle,
-  workType,
-  workLocation,
-  description,
-}) => {
-  // This flag ensures we render client-only parts after mount.
+export const CareerCard = ({ jobTitle, workType, workLocation, description }) => {
   const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  useEffect(() => setIsMounted(true), []);
 
-  // Use react-dropzone only on client
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
-  // Form state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
   });
+
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -114,43 +105,29 @@ export const CareerCard = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Converts a File to base64 (without the data:... prefix)
   const fileToBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file); // gives "data:application/pdf;base64,AAAA..."
+      reader.readAsDataURL(file);
       reader.onload = () => {
         const result = reader.result || "";
-        const base64 = result.split(",")[1]; // remove "data:...;base64,"
-        resolve(base64);
+        resolve(result.split(",")[1]);
       };
-      reader.onerror = (error) => reject(error);
+      reader.onerror = reject;
     });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
 
-    if (acceptedFiles.length === 0) {
-      setMessage("Please upload your resume before applying.");
-      return;
-    }
-
-    if (
-      !formData.firstName.trim() ||
-      !formData.lastName.trim() ||
-      !formData.email.trim()
-    ) {
-      setMessage("Please fill in all required fields.");
-      return;
-    }
+    if (acceptedFiles.length === 0) return setMessage("Please upload your resume before applying.");
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim())
+      return setMessage("Please fill in all required fields.");
 
     setSubmitting(true);
 
     try {
       const resumeFile = acceptedFiles[0];
-
-      // convert file to base64
       const resumeBase64 = await fileToBase64(resumeFile);
 
       const payload = {
@@ -163,15 +140,13 @@ export const CareerCard = ({
           name: resumeFile.name,
           type: resumeFile.type,
           size: resumeFile.size,
-          content: resumeBase64, // base64 string
+          content: resumeBase64,
         },
       };
 
       const res = await fetch("/api/apply", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
@@ -180,34 +155,23 @@ export const CareerCard = ({
       if (res.ok) {
         setMessage("Application submitted & emailed successfully!");
         setFormData({ firstName: "", lastName: "", email: "", phone: "" });
-        // Optional: reset dropzone (may need to implement with useDropzone callback)
       } else {
         setMessage(result.msg || "Submission failed.");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       setMessage("An error occurred while submitting.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const files = acceptedFiles.map((file) => (
-    <div className="flex items-center gap-2" key={file.path}>
-      <i className="uil uil-file-alt text-lg" />
-      <h6 className="mt-1 leading-none">
-        {file.name} {(file.size / 1000000).toFixed(2)} MB
-      </h6>
-    </div>
-  ));
-
   return (
     <Dialog>
-      {/* Card Summary */}
       <div className="flex w-full flex-col items-start gap-6 rounded-lg border bg-clever-gray-light px-6 py-4 text-clever-black">
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col items-start gap-2">
-            <h6 className="text-base font-semibold capitalize text-clever-black md:text-xl">
+            <h6 className="text-base font-semibold capitalize md:text-xl">
               {jobTitle}
             </h6>
             <div className="flex items-center gap-2">
@@ -215,11 +179,13 @@ export const CareerCard = ({
               <CleaverBadge>{workLocation}</CleaverBadge>
             </div>
           </div>
+
           <div className="flex flex-col items-center gap-1 md:flex-row md:gap-6">
             <button className="flex items-center gap-2">
               <p className="text-sm md:text-base">Share</p>
               <i className="uil uil-share-alt" />
             </button>
+
             <DialogTrigger asChild>
               <button className="flex items-center gap-2">
                 <p className="text-sm md:text-base">Apply</p>
@@ -228,107 +194,57 @@ export const CareerCard = ({
             </DialogTrigger>
           </div>
         </div>
-        <div className="flex w-full flex-col gap-1">
-          <p className="text-left">{description}</p>
-        </div>
+
+        <p className="text-left">{description}</p>
       </div>
 
-      {/* Application Dialog */}
-      <DialogContent
-        className="h-[95vh] w-[95vw] overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:h-auto md:max-h-[90vh] md:max-w-[1000px] md:p-6"
-        hideCloseButton={true}
-      >
+      <DialogContent className="h-[95vh] w-[95vw] overflow-y-auto rounded-lg bg-clever-gray-light p-4 text-clever-black md:max-h-[90vh] md:max-w-[1000px] md:p-6">
         <DialogHeader className="flex flex-col items-start gap-2">
-          <DialogTitle className="flex w-full items-center justify-between">
-            <div className="flex flex-col items-start gap-2">
-              <h6 className="text-base font-semibold capitalize text-clever-black md:text-xl">
-                {jobTitle}
-              </h6>
-              <div className="flex items-center gap-2">
-                <CleaverBadge>{workType}</CleaverBadge>
-                <CleaverBadge>{workLocation}</CleaverBadge>
-              </div>
-            </div>
-            <div className="flex items-center gap-6">
-              <button className="flex items-center gap-2">
-                <p className="text-sm md:text-base">Share</p>
-                <i className="uil uil-share-alt" />
-              </button>
-            </div>
-          </DialogTitle>
+          <DialogTitle>{jobTitle}</DialogTitle>
           <DialogDescription>
             <p className="text-left">{description}</p>
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="flex w-full flex-col gap-4 pb-4">
-          <Input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
-          />
-          <Input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
-          />
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
-          />
-          <Input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className="w-full h-auto rounded-[8px] border-clever-black bg-clever-gray-light px-6 py-4 uppercase text-clever-black placeholder:text-clever-black placeholder:text-opacity-50 md:text-[18px]"
-          />
+          <Input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleInputChange} />
+          <Input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleInputChange} />
+          <Input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} />
+          <Input name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleInputChange} />
 
-          {/* Resume Upload Section */}
           {isMounted && (
             <div className="flex w-full flex-col gap-2">
               {acceptedFiles.length === 0 ? (
                 <div
                   {...getRootProps({
                     className:
-                      "dropzone flex cursor-pointer flex-col gap-2 items-center justify-center w-full border border-clever-black rounded-lg px-6 py-4",
+                      "flex cursor-pointer flex-col items-center justify-center gap-2 w-full border border-clever-black rounded-lg px-6 py-4",
                   })}
                 >
                   <input {...getInputProps()} />
                   <i className="uil uil-file-upload text-3xl" />
-                  <p className="w-fit">Drag or Click here to add your CV</p>
+                  <p>Drag or Click here to add your CV</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2 border border-clever-black rounded-lg px-6 py-4">
-                  {files}
+                  <p>{acceptedFiles[0].name}</p>
                   <p className="text-green-600">Resume Uploaded Successfully!</p>
                 </div>
               )}
             </div>
           )}
 
-          {/* Mobile Responsive Apply Button */}
-          <DialogFooter className="flex w-full flex-row justify-center sm:justify-center mt-2">
+          <DialogFooter className="mt-2 flex w-full justify-center">
             <button
               type="submit"
               disabled={submitting}
-              className="w-full md:w-auto px-6 py-4 text-base md:px-8 md:py-4 md:text-base text-white bg-clever-purple hover:bg-clever-purple/90 transition-colors rounded-md font-semibold"
+              className="w-full md:w-auto rounded-md bg-clever-purple px-6 py-4 font-semibold text-white hover:bg-clever-purple/90"
             >
               {submitting ? "Submitting..." : "Apply"}
             </button>
           </DialogFooter>
-          {message && <p className="text-center mt-2">{message}</p>}
+
+          {message && <p className="mt-2 text-center">{message}</p>}
         </form>
       </DialogContent>
     </Dialog>

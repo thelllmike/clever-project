@@ -105,8 +105,8 @@ export default function App({ Component, pageProps }) {
           gtag('config', 'AW-17827951804');
         `}
       </Script>
-
-      <Nav />
+<Nav overlay />
+      
       <AnimatePresence mode="wait">
         <Component {...pageProps} key={router.route} />
       </AnimatePresence>

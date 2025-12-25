@@ -1,82 +1,88 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
-import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { easeInOut, motion as m } from "framer-motion";
+import { easeInOut, motion as m, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
-// import Lottie from "lottie-react";
-import { AnimatePresence } from "framer-motion";
 
-import logo from "../../public/images/logo.png";
 import menuIconAnim from "../../public/anims/hamburgurIocn.json";
 import { FooterMin } from "./FooterMin";
+
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
-const Nav = () => {
-  const [currentPath, setCurrentPath] = useState("");
+const Nav = ({ overlay = false }) => {
   const pathname = usePathname();
+  const [currentPath, setCurrentPath] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const menuIconRef = useRef(null);
 
   useEffect(() => {
-    setCurrentPath(pathname); // Ensure consistency between client and server
+    setCurrentPath(pathname);
   }, [pathname]);
 
+  // Make overlay transparent at top, and become glass on scroll
+  useEffect(() => {
+    if (!overlay) return;
+
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [overlay]);
+
   const handleMenu = () => {
-    if (menuIconRef.current) {
-      if (!menuOpen) {
-        menuIconRef.current.playSegments([0, 80], true);
-      } else {
-        menuIconRef.current.playSegments([80, 0], true);
-      }
-      setMenuOpen(!menuOpen);
-    }
+    if (!menuIconRef.current) return;
+
+    if (!menuOpen) menuIconRef.current.playSegments([0, 80], true);
+    else menuIconRef.current.playSegments([80, 0], true);
+
+    setMenuOpen((v) => !v);
   };
 
   const RotatingWord = ({
-  words = [
-    { text: "Project", className: "text-white" },
-    { text: "People", className: "text-clever-purple" },
-    { text: "Inovation", className: "text-clever-purple" },
-  ],
-  interval = 2200,
-}) => {
-  const [i, setI] = useState(0);
+    words = [
+      { text: "Project", className: "text-white" },
+      { text: "People", className: "text-clever-purple" },
+      { text: "Inovation", className: "text-clever-purple" },
+    ],
+    interval = 2200,
+  }) => {
+    const [i, setI] = useState(0);
 
-  useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % words.length), interval);
-    return () => clearInterval(t);
-  }, [interval, words.length]);
+    useEffect(() => {
+      const t = setInterval(() => setI((v) => (v + 1) % words.length), interval);
+      return () => clearInterval(t);
+    }, [interval, words.length]);
 
-  const current = words[i];
-  const maxLen = Math.max(...words.map((w) => w.text.length)); // longest word
+    const current = words[i];
+    const maxLen = Math.max(...words.map((w) => w.text.length));
 
-
-  return (
-    <span
-      className="relative inline-flex h-[1.4em] overflow-hidden align-baseline"
-      style={{ width: `${maxLen}ch` }} // FIX: keeps width constant so "Clever" won't move
-    >
-      <AnimatePresence mode="wait">
-        <m.span
-          key={current.text}
-          initial={{ rotateX: 90, y: "0.6em", opacity: 0 }}
-          animate={{ rotateX: 0, y: "0em", opacity: 1 }}
-          exit={{ rotateX: -90, y: "-0.6em", opacity: 0 }}
-          transition={{ duration: 0.45, ease: "easeInOut" }}
-          style={{ transformOrigin: "50% 50%", display: "inline-block" }}
-          className={`inline-block ${current.className}`}
-        >
-          {current.text}
-        </m.span>
-      </AnimatePresence>
-    </span>
-  );
-};
+    return (
+      <span
+        className="relative inline-flex h-[1.4em] overflow-hidden align-baseline"
+        style={{ width: `${maxLen}ch` }}
+      >
+        <AnimatePresence mode="wait">
+          <m.span
+            key={current.text}
+            initial={{ rotateX: 90, y: "0.6em", opacity: 0 }}
+            animate={{ rotateX: 0, y: "0em", opacity: 1 }}
+            exit={{ rotateX: -90, y: "-0.6em", opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            style={{ transformOrigin: "50% 50%", display: "inline-block" }}
+            className={`inline-block ${current.className}`}
+          >
+            {current.text}
+          </m.span>
+        </AnimatePresence>
+      </span>
+    );
+  };
 
   const links = [
     { href: "/Contact", label: "Contact" },
@@ -88,34 +94,45 @@ const Nav = () => {
   return (
     <div
       className={clsx(
-        "left-0 top-0 z-10 w-screen bg-clever-black",
-        { absolute: currentPath === "/" },
-        { sticky: currentPath !== "/" },
+        // base
+        "left-0 top-0 w-screen transition-colors duration-300",
+        // overlay mode = fixed + transparent
+        overlay
+          ? "fixed z-50 bg-transparent"
+          : clsx(
+              "z-10 bg-clever-black",
+              { absolute: currentPath === "/" },
+              { sticky: currentPath !== "/" }
+            ),
+        // glass effect when scrolling on overlay
+        overlay && scrolled && "backdrop-blur-md bg-clever-black/60",
+        // if menu open on overlay, force solid background (so menu looks correct)
+        overlay && menuOpen && "bg-clever-black"
       )}
     >
       <div className="relative z-20 mx-auto flex max-w-[1320px] items-center justify-between px-6 py-4 text-[24px] font-medium uppercase leading-6 lg:px-3 lg:py-8">
+        {/* Desktop links */}
         <m.ul layout className="hidden list-none gap-16 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={clsx(
-                "flex items-center gap-2 text-clever-gray-light",
-                {
-                  "text-clever-purple": currentPath === link.href,
-                },
-              )}
+              className={clsx("flex items-center gap-2 text-clever-gray-light", {
+                "text-clever-purple": currentPath === link.href,
+              })}
             >
               {currentPath === link.href && (
                 <m.span
                   layoutId="dot"
                   className="h-2 w-2 rounded-full bg-clever-purple"
-                ></m.span>
+                />
               )}
               {link.label}
             </Link>
           ))}
         </m.ul>
+
+        {/* Mobile menu button */}
         <button
           title="Mobile Menu"
           className="block lg:hidden"
@@ -128,26 +145,26 @@ const Nav = () => {
             loop={false}
           />
         </button>
-        <div >
-         <Link href="/" className="flex items-center gap-3">
-  {/* optional: keep logo */}
 
-  {/* one-line text */}
-  <div className="flex items-center gap-2 text-base font-bold uppercase leading-none lg:text-xl">
-  <span className="text-white">Clever</span>
-
-  <RotatingWord
-    words={[
-      { text: "Project", className: "text-white" },
-      { text: "People", className: "text-clever-purple" },
-      { text: "Inovation", className: "text-clever-purple" },
-    ]}
-    interval={2200}
-  />
-</div>
-</Link>
+        {/* Brand */}
+        <div>
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex items-center gap-2 text-base font-bold uppercase leading-none lg:text-xl">
+              <span className="text-white">Clever</span>
+              <RotatingWord
+                words={[
+                  { text: "Project", className: "text-white" },
+                  { text: "People", className: "text-clever-purple" },
+                  { text: "Inovation", className: "text-clever-purple" },
+                ]}
+                interval={2200}
+              />
+            </div>
+          </Link>
         </div>
       </div>
+
+      {/* Mobile menu */}
       <AnimatePresence mode="wait">
         {menuOpen ? (
           <MobileMenu
@@ -172,7 +189,6 @@ export const MobileMenu = ({
 }) => {
   const links = navLinks;
   const delay = 1200;
-
   const [animationState, setAnimationState] = useState("hidden");
 
   const slideInOutAnim = {
@@ -229,13 +245,10 @@ export const MobileMenu = ({
 
   useEffect(() => {
     if (menuHandler) {
-      const timer = setTimeout(() => {
-        setAnimationState("visible");
-      }, delay);
-      return () => clearTimeout(timer); // Clean up timeout on unmount or change
-    } else {
-      setAnimationState("hidden");
+      const timer = setTimeout(() => setAnimationState("visible"), delay);
+      return () => clearTimeout(timer);
     }
+    setAnimationState("hidden");
   }, [menuHandler, delay]);
 
   return (
@@ -255,9 +268,7 @@ export const MobileMenu = ({
               href={link.href}
               className={clsx(
                 "flex items-center gap-2 overflow-hidden text-2xl font-medium uppercase text-clever-gray-light",
-                {
-                  "text-clever-purple": currentPath === link.href,
-                },
+                { "text-clever-purple": currentPath === link.href }
               )}
               onClick={handleMenuTrigger}
             >
@@ -274,6 +285,7 @@ export const MobileMenu = ({
             </Link>
           ))}
         </div>
+
         <m.div
           initial={{
             y: "100%",
@@ -294,14 +306,15 @@ export const MobileMenu = ({
           <FooterMin />
         </m.div>
       </m.div>
+
       <m.div
         custom={2}
         variants={slideInOutAnim}
         initial="hidden"
         animate={menuHandler ? "visible" : "hidden"}
         exit="hidden"
-        className="top-[calc(100vh - 80px)] fixed left-0 h-screen w-screen bg-clever-purple p-6"
-      ></m.div>
+        className="fixed left-0 top-[calc(100vh-80px)] h-screen w-screen bg-clever-purple p-6"
+      />
     </>
   );
 };
