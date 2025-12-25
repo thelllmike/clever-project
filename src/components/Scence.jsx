@@ -90,6 +90,7 @@ const Scene = () => {
           <ScrollAnimation />
           <Scroll html>
             <Hero />
+            
             <Feilds scrollOffset={scrollOffset} />
             <About />
              <HoverImageLinks />
