@@ -7,6 +7,7 @@ import python from "../../../public/images/languages/python-original.svg";
 // Note: avoid wrapping this page with the client-only `Cover` component
 // to prevent server/client hydration mismatches.
 import ProductView from "@/components/ProductView";
+import MouseFollower from "./../../components/MouseFollower";
 
 const ProjectsPage = () => {
   return (
@@ -15,6 +16,7 @@ const ProjectsPage = () => {
         <title>Projects</title>
         <meta name="description" content="Contact page" />
       </Head>
+        <MouseFollower />
         <div className="mt-[115px] flex h-full flex-col items-center justify-center gap-8 md:gap-12 lg:mt-[150px]">
           <div className="flex w-full max-w-[1320px] flex-col items-center justify-center gap-6 px-6 sm:mx-auto md:gap-10 lg:p-0">
             <iframe
