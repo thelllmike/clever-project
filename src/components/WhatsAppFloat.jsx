@@ -26,7 +26,7 @@ export default function WhatsAppFloat() {
 
   return (
     <motion.a
-      href="https://wa.me/94775364333"
+      href="https://wa.me/94704057137"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
