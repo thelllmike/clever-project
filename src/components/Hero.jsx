@@ -69,21 +69,21 @@ export default function Hero() {
           </m.h1>
         </div>
 
-        {/* optional trail */}
+        {/* optional trail
         <div className="absolute left-0 right-0 bottom-12 flex justify-center px-7">
           <MouseImageTrailHero
             className="h-40 w-full max-w-[900px] md:h-56"
             renderImageBuffer={45}
             rotationRange={20}
             images={[
+              "/imgs/active/engineer.jpg",
               "/imgs/active/i1.png",
-              "/imgs/active/i1.png",
-              "/imgs/active/i1.png",
-              "/imgs/active/i1.png",
-              "/imgs/active/i1.png",
+              "/imgs/active/platform.jpg",
+              "/imgs/active/team.jpg",
+              "/imgs/active/system.jpg",
             ]}
           />
-        </div>
+        </div> */}
       </div>
     </section>
   );
