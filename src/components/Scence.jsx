@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Scroll, ScrollControls, useScroll } from "@react-three/drei";
 
 import { getProject, val } from "@theatre/core";
@@ -30,11 +30,8 @@ function BackgroundVideo() {
         playsInline
         preload="auto"
       >
-        {/* IMPORTANT: this must be a REAL mp4 file in /public/videos */}
         <source src="/videos/hero-bg.mp4" type="video/mp4" />
       </video>
-
-      {/* Dark overlay so text is readable */}
       <div className="absolute inset-0 bg-black/55" />
     </div>
   );
@@ -43,6 +40,10 @@ function BackgroundVideo() {
 export default function Scene() {
   const [scrollOffset, setScrollOffset] = useState(0);
   const [sheet, setSheet] = useState(null);
+
+  // ✅ pages must match HTML height
+  const contentRef = useRef(null);
+  const [pages, setPages] = useState(7);
 
   useEffect(() => {
     const isMobileView = window.matchMedia("(max-width: 768px)").matches;
@@ -53,6 +54,28 @@ export default function Scene() {
     setSheet(s);
   }, []);
 
+  useLayoutEffect(() => {
+    if (!contentRef.current) return;
+
+    const calcPages = () => {
+      const h = contentRef.current.scrollHeight || contentRef.current.getBoundingClientRect().height;
+      const vh = window.innerHeight || 1;
+      // +1 buffer so last section (Footer) is reachable
+      setPages(Math.max(1, Math.ceil(h / vh) + 1));
+    };
+
+    calcPages();
+
+    const ro = new ResizeObserver(calcPages);
+    ro.observe(contentRef.current);
+
+    window.addEventListener("resize", calcPages);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", calcPages);
+    };
+  }, [sheet]);
+
   const ScrollAnimation = () => {
     const theatreSheet = useCurrentSheet();
     const scroll = useScroll();
@@ -60,6 +83,9 @@ export default function Scene() {
     useFrame(() => {
       const sequenceLength = val(theatreSheet.sequence.pointer.length);
       theatreSheet.sequence.position = scroll.offset * sequenceLength;
+
+      // ⚠️ optional (but heavy): updates React state every frame.
+      // keep if you really need it:
       setScrollOffset(scroll.offset);
     });
 
@@ -70,20 +96,16 @@ export default function Scene() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden">
-      {/* ✅ Background video behind everything */}
       <BackgroundVideo />
-
-      {/* ✅ Cursor / extras above video */}
       <MouseFollower />
 
       <Canvas>
-        <ScrollControls pages={7} damping={0.3}>
+        <ScrollControls pages={pages} damping={0.3}>
           <SheetProvider sheet={sheet}>
             <ScrollAnimation />
 
             <Scroll html>
-              {/* ✅ This wrapper forces ALL html content above the video */}
-              <div className="relative z-10">
+              <div ref={contentRef} className="relative z-10">
                 <Hero />
                 <Feilds scrollOffset={scrollOffset} />
                 <About />
