@@ -10,34 +10,34 @@ export default function HoverImageLinks() {
     <section className="bg-clever-black px-6 py-12 md:py-16">
       <div className="mx-auto w-full max-w-[1320px]">
         <HoverLink
-          heading="About"
-          subheading="Learn what we do here"
-          imgSrc="/img/hover/i1.png"
-          href="/About"
+          heading="ENGINEERING"
+          subheading="Quality driven delivery"
+          imgSrc="/img/hover/engineer.jpg"
+          href="/"
         />
         <HoverLink
-          heading="Clients"
-          subheading="We work with great people"
-          imgSrc="/img/hover/i1.png"
-          href="/#clients"
+          heading="PLATFORMS"
+          subheading="Web, iOS, Android & more"
+          imgSrc="/img/hover/platform.jpg"
+          href="/#"
         />
         <HoverLink
-          heading="Projects"
-          subheading="Our work speaks for itself"
-          imgSrc="/img/hover/i1.png"
-          href="/Projects"
+          heading="SYSTEMS"
+          subheading="APIs, dashboards, automations"
+          imgSrc="/img/hover/security.jpg"
+          href="/"
         />
         <HoverLink
-          heading="Careers"
-          subheading="We want cool people"
-          imgSrc="/img/hover/i2.png"
-          href="/Careers"
+          heading="SECURITY"
+          subheading="Builtin best practices"
+          imgSrc="/img/hover/system.jpg"
+          href="/"
         />
         <HoverLink
-          heading="Contact"
-          subheading="Let’s build something together"
-          imgSrc="/img/hover/i2.png"
-          href="/Contact"
+          heading="THE TEAM"
+          subheading="People behind the work"
+          imgSrc="/img/hover/team.jpg"
+          href="/"
         />
       </div>
     </section>
