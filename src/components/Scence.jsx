@@ -1,9 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { useEffect, useMemo, useState } from "react";
-import WhatsAppFloat from "./WhatsAppFloat";
-import HoverImageLinks from "@/components/HoverImageLinks";
+import React, { useEffect, useState } from "react";
 import { Scroll, ScrollControls, useScroll } from "@react-three/drei";
 
 import { getProject, val } from "@theatre/core";
@@ -15,14 +13,35 @@ import About from "./About";
 import Clients from "./Clients";
 import Footer from "./Footer";
 import MouseFollower from "./MouseFollower";
+import HoverImageLinks from "@/components/HoverImageLinks";
+import WhatsAppFloat from "./WhatsAppFloat";
 
 import brainAnimLG from "../../public/objAnim/brainAnim-lg.json";
 import brainAnimSM from "../../public/objAnim/brainAnim-sm.json";
 
+function BackgroundVideo() {
+  return (
+    <div className="fixed inset-0 -z-20">
+      <video
+        className="h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      >
+        {/* IMPORTANT: this must be a REAL mp4 file in /public/videos */}
+        <source src="/videos/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay so text is readable */}
+      <div className="absolute inset-0 bg-black/55" />
+    </div>
+  );
+}
+
 export default function Scene() {
   const [scrollOffset, setScrollOffset] = useState(0);
-
-  // ✅ Create sheet only on client after we know mobile/desktop
   const [sheet, setSheet] = useState(null);
 
   useEffect(() => {
@@ -31,7 +50,6 @@ export default function Scene() {
 
     const project = getProject("Brain Project", { state: initialState });
     const s = project.sheet("Scene");
-
     setSheet(s);
   }, []);
 
@@ -42,19 +60,20 @@ export default function Scene() {
     useFrame(() => {
       const sequenceLength = val(theatreSheet.sequence.pointer.length);
       theatreSheet.sequence.position = scroll.offset * sequenceLength;
-
-      // NOTE: this re-renders every frame. If it feels heavy, I’ll show you a lighter way.
       setScrollOffset(scroll.offset);
     });
 
     return null;
   };
 
-  // ✅ Don’t render until sheet exists
   if (!sheet) return null;
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative h-screen w-screen overflow-hidden">
+      {/* ✅ Background video behind everything */}
+      <BackgroundVideo />
+
+      {/* ✅ Cursor / extras above video */}
       <MouseFollower />
 
       <Canvas>
@@ -63,12 +82,15 @@ export default function Scene() {
             <ScrollAnimation />
 
             <Scroll html>
-              <Hero />
-              <Feilds scrollOffset={scrollOffset} />
-              <About />
-              <HoverImageLinks />
-              <Clients />
-              <Footer />
+              {/* ✅ This wrapper forces ALL html content above the video */}
+              <div className="relative z-10">
+                <Hero />
+                <Feilds scrollOffset={scrollOffset} />
+                <About />
+                <HoverImageLinks />
+                <Clients />
+                <Footer />
+              </div>
             </Scroll>
           </SheetProvider>
         </ScrollControls>

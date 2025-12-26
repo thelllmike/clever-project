@@ -26,23 +26,7 @@ const parentVariants = {
 
 export default function Hero() {
   return (
-    <section className="relative w-screen overflow-hidden bg-clever-black">
-      {/* Background video */}
-   <video
-  className="absolute inset-0 h-full w-full object-cover"
-  autoPlay
-  muted
-  loop
-  playsInline
-  preload="auto"
->
-  <source src="/videos/hero-bg.mp4" type="video/mp4" />
-</video>
-
-      {/* Optional dark overlay so text is readable */}
-      <div className="absolute inset-0 -z-10 bg-black/55" />
-
-      {/* Your content */}
+    <section className="relative w-screen overflow-hidden">
       <div className="mt-[80px] flex h-[calc(100vh-80px)] w-screen justify-center lg:mt-[150px] lg:h-[calc(100vh-150px)]">
         <div className="relative mx-auto mt-6 flex h-fit flex-col px-7 text-center lg:mt-0 lg:p-0">
           <m.h1
@@ -85,7 +69,7 @@ export default function Hero() {
           </m.h1>
         </div>
 
-        {/* (Optional) your trails */}
+        {/* optional trail */}
         <div className="absolute left-0 right-0 bottom-12 flex justify-center px-7">
           <MouseImageTrailHero
             className="h-40 w-full max-w-[900px] md:h-56"
