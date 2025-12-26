@@ -10,6 +10,13 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  /* change this if your brand purple is different */
+  --clever-purple: #7c3aed;
+  --clever-black: #0b0b0b;
+}
 
 html {
   background-color: #191919;
@@ -78,5 +85,142 @@ html.lenis body {
 @media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
+  }
+}
+
+/* ===== Clever Projects Preloader ===== */
+.cp-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+  z-index: 99999;
+}
+
+/* ✅ make ALL preloader text clever black */
+.cp-preloader,
+.cp-preloader * {
+  color: var(--clever-black);
+}
+
+.cp-preloader .pre-welcome,
+.cp-preloader .welcome {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.cp-preloader .pre-welcome .line,
+.cp-preloader .welcome .line {
+  height: 24px;
+  font-size: 20px;
+  margin-block: 8px;
+  overflow: hidden;
+}
+
+/* ✅ force welcome text also clever black (not gray) */
+.cp-preloader .welcome .line {
+  color: var(--clever-black);
+}
+
+.cp-preloader .pre-welcome .line p {
+  transform: translateY(-100%);
+}
+
+.cp-preloader .welcome .line p {
+  transform: translateY(100%);
+}
+
+.cp-preloader .pre-welcome,
+.cp-preloader .welcome {
+  position: absolute;
+  top: 45%;
+  left: 20%;
+}
+
+.cp-preloader .welcome {
+  z-index: 10;
+}
+
+.cp-preloader .numbers {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  overflow: hidden;
+}
+
+.cp-preloader .number {
+  height: 80px;
+  overflow: hidden;
+}
+
+.cp-preloader .number-1 .number-wrap {
+  transform: translateY(100%);
+}
+
+.cp-preloader .number-wrap {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.cp-preloader .number-wrap span {
+  height: 80px;
+  line-height: 80px;
+  font-size: 72px;
+  font-weight: 800; /* a bit stronger */
+}
+
+/* ✅ percentage always clever black */
+.cp-preloader .percentage {
+  font-size: 30px;
+  font-family: sans-serif;
+  margin-left: 4px;
+  align-self: start;
+  color: var(--clever-black) !important;
+}
+
+.cp-preloader .number-2 .number-wrap,
+.cp-preloader .number-3 .number-wrap {
+  height: 800px;
+}
+
+.cp-preloader .number-1 .number-wrap {
+  height: 80px;
+}
+
+/* ✅ progress bar = clever purple */
+.cp-preloader .progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 0;
+  background-color: var(--clever-purple);
+  z-index: 5;
+}
+
+/* ✅ your bold helper class (keeps black text) */
+.cp-preloader .bold {
+  font-weight: 800;
+  color: var(--clever-black);
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .cp-preloader .pre-welcome,
+  .cp-preloader .welcome {
+    left: 10%;
+  }
+
+  .cp-preloader .pre-welcome .line,
+  .cp-preloader .welcome .line {
+    font-size: 18px;
+  }
+
+  .cp-preloader .number-wrap span {
+    font-size: 60px;
   }
 }
