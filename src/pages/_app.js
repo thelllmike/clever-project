@@ -4,8 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import Nav from "../components/Nav";
 import "@/styles/globals.css";
 import Lenis from "lenis";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import Preloader from "../components/Preloader";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -13,7 +14,25 @@ export default function App({ Component, pageProps }) {
   const lenisRef = useRef(null);
   const rafIdRef = useRef(null);
 
-  // 🔒 Always unlock scroll (fixes “stuck scroll” after Dialog/menu navigation)
+  // ✅ show preloader only once per tab session
+  const [showPreloader, setShowPreloader] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const already = sessionStorage.getItem("cp_preloaded");
+    if (!already) {
+      setShowPreloader(true);
+    }
+  }, []);
+
+  const finishPreloader = () => {
+    try {
+      sessionStorage.setItem("cp_preloaded", "1");
+    } catch {}
+    setShowPreloader(false);
+  };
+
+  // 🔓 Hard unlock scroll
   useEffect(() => {
     const unlockScroll = () => {
       const html = document.documentElement;
@@ -26,11 +45,12 @@ export default function App({ Component, pageProps }) {
       body.style.left = "";
       body.style.right = "";
       body.style.bottom = "";
-
       html.style.overflow = "";
 
       body.removeAttribute("data-scroll-locked");
       html.removeAttribute("data-scroll-locked");
+      body.classList.remove("overflow-hidden");
+      html.classList.remove("overflow-hidden");
     };
 
     unlockScroll();
@@ -45,9 +65,8 @@ export default function App({ Component, pageProps }) {
     };
   }, [router.events]);
 
-  // ✅ Lenis: create + cleanup correctly on route change
+  // ✅ Lenis lifecycle
   useEffect(() => {
-    // stop old RAF + destroy old lenis (IMPORTANT)
     if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
     rafIdRef.current = null;
 
@@ -56,7 +75,6 @@ export default function App({ Component, pageProps }) {
       lenisRef.current = null;
     }
 
-    // Your rule: no Lenis on home "/"
     if (router.pathname === "/") return;
 
     const lenis = new Lenis({
@@ -71,10 +89,16 @@ export default function App({ Component, pageProps }) {
       lenis.raf(time);
       rafIdRef.current = requestAnimationFrame(raf);
     };
-
     rafIdRef.current = requestAnimationFrame(raf);
 
-    // cleanup on unmount / route change
+    // refresh GSAP ScrollTrigger if used
+    (async () => {
+      try {
+        const stMod = await import("gsap/ScrollTrigger");
+        stMod.ScrollTrigger?.refresh?.();
+      } catch {}
+    })();
+
     return () => {
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
@@ -118,7 +142,10 @@ export default function App({ Component, pageProps }) {
           property="og:description"
           content="Clever Project provides AI, blockchain, and software solutions for businesses worldwide."
         />
-        <meta property="og:image" content="https://www.cleverproject.lk/logo.png" />
+        <meta
+          property="og:image"
+          content="https://www.cleverproject.lk/logo.png"
+        />
         <meta property="og:url" content="https://www.cleverproject.lk" />
         <meta property="og:type" content="website" />
 
@@ -130,7 +157,10 @@ export default function App({ Component, pageProps }) {
           name="twitter:description"
           content="We provide AI, blockchain, and software solutions for businesses worldwide."
         />
-        <meta name="twitter:image" content="https://www.cleverproject.lk/logo.png" />
+        <meta
+          name="twitter:image"
+          content="https://www.cleverproject.lk/logo.png"
+        />
         <meta name="twitter:card" content="summary_large_image" />
 
         <script
@@ -173,6 +203,9 @@ export default function App({ Component, pageProps }) {
           gtag('config', 'AW-17827951804');
         `}
       </Script>
+
+      {/* ✅ Preloader overlays everything */}
+      {showPreloader && <Preloader onDone={finishPreloader} />}
 
       <Nav overlay />
 
