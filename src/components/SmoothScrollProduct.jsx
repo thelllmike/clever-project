@@ -181,7 +181,9 @@ const ProductInfo = ({ brand, productName, onCtaClick }) => {
       </motion.p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        {["Fast setup", "Responsive", "Modern animations", "SEO friendly"].map(
+        {[" Fast POS setup & onboarding",
+  "Smooth, modern cashier friendly UX",
+  "local search ready"].map(
           (t) => (
             <span
               key={t}
@@ -218,9 +220,9 @@ const Plans = ({ plans }) => {
     plans?.length > 0
       ? plans
       : [
-          { title: "Starter", date: "2 Days", location: "Landing + Basic CTA" },
-          { title: "Business", date: "5 Days", location: "Full sections + CMS" },
-          { title: "Pro", date: "10 Days", location: "Animations + Integrations" },
+          { title: "Starter", date: "30 Days", location: "Lkr 2000" },
+          { title: "Business", date: "6 Months", location: "LKr 10000" },
+          { title: "Pro", date: "1 year or More ", location: "LKr 20000" },
         ];
 
   return (
@@ -256,7 +258,7 @@ const PlanItem = ({ title, date, location }) => {
 
       <div className="flex items-center gap-2 text-end text-sm uppercase text-zinc-500">
         <p>{location}</p>
-        <FiMapPin />
+        {/* <FiMapPin /> */}
       </div>
     </motion.div>
   );

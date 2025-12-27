@@ -77,12 +77,24 @@ export default function PinProjectsShowcase({
         });
 
         // ✅ OPTIONAL: keep Outro clean (prevents “last tilted card” showing)
-        ScrollTrigger.create({
-          trigger: ".pin-outro",
-          start: "top bottom",
-          onEnter: () => gsap.to(".pin-card", { opacity: 0, duration: 0.15, overwrite: true }),
-          onLeaveBack: () => gsap.to(".pin-card", { opacity: 1, duration: 0.15, overwrite: true }),
-        });
+      ScrollTrigger.create({
+  trigger: ".pin-outro",
+  start: "top 75%", // ✅ fade only when outro is closer (delay)
+  onEnter: () =>
+    gsap.to(".pin-card", {
+      opacity: 0,
+      duration: 0.45,  // ✅ slower fade (more visible)
+      ease: "power2.out",
+      overwrite: true,
+    }),
+  onLeaveBack: () =>
+    gsap.to(".pin-card", {
+      opacity: 1,
+      duration: 0.25,
+      ease: "power2.out",
+      overwrite: true,
+    }),
+});
 
         // refresh calculations after layout settles
         setTimeout(() => ScrollTrigger.refresh(), 50);

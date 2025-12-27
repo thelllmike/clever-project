@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 import { FooterMin } from "@/components/FooterMin";
 import MouseFollower from "./../../components/MouseFollower";
 import Cover from "@/components/transition";
+import WhatsAppFloat from "../../components/WhatsAppFloat";
 
 import {
   Dialog,
@@ -231,7 +232,7 @@ const ContactPage = () => {
                 </DialogContent>
               </Dialog>
             </div>
-
+ <WhatsAppFloat />
             <FooterMin />
           </div>
         </div>
