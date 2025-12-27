@@ -62,26 +62,26 @@ const Nav = ({ overlay = false }) => {
     const current = words[i];
     const maxLen = Math.max(...words.map((w) => w.text.length));
 
-    return (
-      <span
-        className="relative inline-flex h-[1.4em] overflow-hidden align-baseline"
-        style={{ width: `${maxLen}ch` }}
+return (
+  <span
+    className="relative inline-flex h-[1em] overflow-hidden"
+    style={{ width: `${maxLen}ch` }}
+  >
+    <AnimatePresence mode="wait">
+      <m.span
+        key={current.text}
+        initial={{ rotateX: 90, y: "0.55em", opacity: 0 }}
+        animate={{ rotateX: 0, y: "0em", opacity: 1 }}
+        exit={{ rotateX: -90, y: "-0.55em", opacity: 0 }}
+        transition={{ duration: 0.45, ease: "easeInOut" }}
+        style={{ transformOrigin: "50% 50%", display: "inline-block" }}
+        className={`inline-block leading-none ${current.className}`}
       >
-        <AnimatePresence mode="wait">
-          <m.span
-            key={current.text}
-            initial={{ rotateX: 90, y: "0.6em", opacity: 0 }}
-            animate={{ rotateX: 0, y: "0em", opacity: 1 }}
-            exit={{ rotateX: -90, y: "-0.6em", opacity: 0 }}
-            transition={{ duration: 0.45, ease: "easeInOut" }}
-            style={{ transformOrigin: "50% 50%", display: "inline-block" }}
-            className={`inline-block ${current.className}`}
-          >
-            {current.text}
-          </m.span>
-        </AnimatePresence>
-      </span>
-    );
+        {current.text}
+      </m.span>
+    </AnimatePresence>
+  </span>
+);
   };
 
   const links = [
