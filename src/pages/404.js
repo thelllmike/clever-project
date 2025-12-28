@@ -8,7 +8,7 @@ export default function Custom404() {
         <h1 className="mb-4 text-4xl font-bold">404</h1>
         <p className="mb-4">Page not found</p>
         <Link href="/" className="text-blue-500 hover:text-blue-700">
-          Return Home
+          Return Home 
         </Link>
       </div>
     </div>
