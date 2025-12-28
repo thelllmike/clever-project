@@ -93,23 +93,26 @@ return (
 
   return (
     <div
-      className={clsx(
-        // base
-        "left-0 top-0 w-screen transition-colors duration-300",
-        // overlay mode = fixed + transparent
-        overlay
-          ? "fixed z-50 bg-transparent"
-          : clsx(
-              "z-10 bg-clever-black",
-              { absolute: currentPath === "/" },
-              { sticky: currentPath !== "/" }
-            ),
-        // glass effect when scrolling on overlay
-        overlay && scrolled && "backdrop-blur-md bg-clever-black/60",
-        // if menu open on overlay, force solid background (so menu looks correct)
-        overlay && menuOpen && "bg-clever-black"
-      )}
-    >
+    className={clsx(
+      "left-0 top-0 w-screen transition-colors duration-300",
+      overlay
+        ? "fixed z-50" // no bg here, we control it below
+        : clsx(
+            "z-10 bg-clever-black",
+            { absolute: currentPath === "/" },
+            { sticky: currentPath !== "/" }
+          ),
+  
+      // ✅ MOBILE: always solid black in overlay mode
+      overlay && "bg-clever-black lg:bg-transparent",
+  
+      // ✅ Desktop overlay behavior (glass on scroll)
+      overlay && scrolled && "lg:backdrop-blur-md lg:bg-clever-black/60",
+  
+      // ✅ If menu open, solid on all sizes
+      overlay && menuOpen && "bg-clever-black"
+    )}
+  >
       <div className="relative z-20 mx-auto flex max-w-[1320px] items-center justify-between px-6 py-4 text-[24px] font-medium uppercase leading-6 lg:px-3 lg:py-8">
         {/* Desktop links */}
         <m.ul layout className="hidden list-none gap-16 lg:flex">
