@@ -8,24 +8,27 @@ export default function MouseFollower() {
   const ringRef = useRef(null);
 
   useEffect(() => {
-    // Disable on touch devices / no-hover pointers
-    const canHover =
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (typeof window === "undefined") return;
 
-    // Respect reduced motion
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // ✅ Better desktop check (works on Mac trackpad too)
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
-    if (!canHover || reduceMotion) return;
+    // ✅ Reduced motion
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // If not desktop-like pointer or reduced motion, do nothing
+    if (!isFinePointer || reduceMotion) return;
 
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
     // Start hidden until first move
-    gsap.set([dot, ring], { opacity: 0, x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    gsap.set([dot, ring], {
+      opacity: 0,
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
 
     const xToDot = gsap.quickTo(dot, "x", { duration: 0.12, ease: "power3.out" });
     const yToDot = gsap.quickTo(dot, "y", { duration: 0.12, ease: "power3.out" });
@@ -46,14 +49,16 @@ export default function MouseFollower() {
 
       xToDot(x);
       yToDot(y);
-
       xToRing(x);
       yToRing(y);
     };
 
-    const onLeaveWindow = () => {
-      gsap.to([dot, ring], { opacity: 0, duration: 0.2 });
-      shown = false;
+    const onMouseOut = (e) => {
+      // leaving window
+      if (!e.relatedTarget && !e.toElement) {
+        gsap.to([dot, ring], { opacity: 0, duration: 0.2 });
+        shown = false;
+      }
     };
 
     // Hover effects on interactive elements
@@ -70,45 +75,35 @@ export default function MouseFollower() {
       gsap.to(dot, { scale: 1, duration: 0.2, ease: "power2.out" });
     };
 
-    const attachHoverListeners = () => {
-      const nodes = document.querySelectorAll(interactiveSelector);
-      nodes.forEach((el) => {
-        el.addEventListener("mouseenter", handleEnter);
-        el.addEventListener("mouseleave", handleLeave);
-      });
-      return () => {
-        nodes.forEach((el) => {
-          el.removeEventListener("mouseenter", handleEnter);
-          el.removeEventListener("mouseleave", handleLeave);
-        });
-      };
-    };
-
-    const detach = attachHoverListeners();
-
-    window.addEventListener("mousemove", onMove, { passive: true });
-    window.addEventListener("mouseout", (e) => {
-      // when leaving the window
-      if (!e.relatedTarget && !e.toElement) onLeaveWindow();
+    const nodes = Array.from(document.querySelectorAll(interactiveSelector));
+    nodes.forEach((el) => {
+      el.addEventListener("mouseenter", handleEnter);
+      el.addEventListener("mouseleave", handleLeave);
     });
 
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("mouseout", onMouseOut);
+
     return () => {
-      detach?.();
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseout", onMouseOut);
+      nodes.forEach((el) => {
+        el.removeEventListener("mouseenter", handleEnter);
+        el.removeEventListener("mouseleave", handleLeave);
+      });
     };
   }, []);
 
   return (
     <>
-      {/* Dot */}
+      {/* ✅ Hidden on mobile/tablet, visible on desktop */}
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[9999] hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference md:block"
       />
-      {/* Ring */}
       <div
         ref={ringRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9998] h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 opacity-90 mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-[9998] hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 opacity-90 mix-blend-difference md:block"
       />
     </>
   );
