@@ -7,13 +7,13 @@ import { Scroll, ScrollControls, useScroll } from "@react-three/drei";
 import { getProject, val } from "@theatre/core";
 import { SheetProvider, useCurrentSheet } from "@theatre/r3f";
 
-import Hero from "./Hero";
-import Feilds from "./Feilds";
-import About from "./About";
-import Clients from "./Clients";
+import Hero from "./home/Hero";
+import Feilds from "./home/Feilds";
+import About from "./home/About";
+import Clients from "./home/Clients";
 import Footer from "./Footer";
 import MouseFollower from "./MouseFollower";
-import HoverImageLinks from "@/components/HoverImageLinks";
+import HoverImageLinks from "@/components/home/HoverImageLinks";
 import WhatsAppFloat from "./WhatsAppFloat";
 
 import brainAnimLG from "../../public/objAnim/brainAnim-lg.json";

@@ -4,7 +4,7 @@ import { FooterMin } from "@/components/FooterMin";
 import WhatsAppFloat from "../../components/WhatsAppFloat";
 
 const SmoothScrollProduct = dynamic(
-  () => import("@/components/SmoothScrollProduct"),
+  () => import("@/components/product/SmoothScrollProduct"),
   { ssr: false }
 );
 
