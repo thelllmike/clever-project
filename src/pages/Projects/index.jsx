@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { FooterMin } from "@/components/FooterMin";
 import MouseFollower from "../../components/MouseFollower";
-import PinProjectsShowcase from "@/components/PinProjectsShowcase";
+import PinProjectsShowcase from "@/components/project/PinProjectsShowcase";
 import WhatsAppFloat from "../../components/WhatsAppFloat";
 
 export default function ProjectsPage() {

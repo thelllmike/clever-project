@@ -8,7 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
 import { Pagination, Navigation, EffectCoverflow } from "swiper/modules";
-import CarouselCard from "./CarouselCard";
+import CarouselCard from "../CarouselCard";
 import Marquee from "./Marquee";
 
 const Clients = () => {
