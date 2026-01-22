@@ -13,7 +13,7 @@ const workItems = [
     },
     {
         index: '02',
-        title: 'AGENXY CLIENTS',
+        title: 'AGENXY CLIENTS BEFORE AND AFTER',
         category: 'Agency Work',
         metric: 'Brand Content',
         href: 'https://www.instagram.com/agenxy.media',
@@ -21,7 +21,7 @@ const workItems = [
     },
     {
         index: '03',
-        title: 'AI TRANSFORMATIONS',
+        title: 'AI-RAW VIDS TO EDITED VIDS',
         category: 'AI Enhancement',
         metric: 'HeyGen Post-Production',
         href: 'https://www.instagram.com/ai.with.100',
