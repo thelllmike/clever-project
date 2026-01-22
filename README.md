@@ -2,7 +2,7 @@
 
 **The digital media powerhouse. ** Where ambition meets execution. Where vision becomes reality.  AGENXY.MEDIA isn't just another agency—we're the firm that closes deals others can't even open.
 
-## 🌟 The Briefing
+## 🌟 Brief
 
 Listen.  The digital landscape is brutal. Clients want results. They don't want excuses. They don't want mediocrity. They want winners.
 That's what AGENXY.MEDIA delivers.  We've built a website that doesn't just showcase our capabilities—it *proves* them. Every pixel, every line of code, every interaction is deliberate.  Calculated. Winning.
@@ -10,7 +10,7 @@ We don't just create digital experiences. We engineer competitive advantages.
 
 ## 🚀 Enter The Arena
 
-Check us out:  **[https://agenxy-media.vercel.app](https://agenxy-media.vercel.app)**
+Check us out:  **[https://agenxy-media.vercel.app](https://agenxymedia.vercel.app)**
 Because if you're not winning, you're losing.
 
 ## 💻 The Arsenal
