@@ -1,0 +1,134 @@
+.testimonial {
+    padding: 10rem 0;
+    background: var(--void);
+    position: relative;
+}
+
+.testimonial-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.quote-mark {
+    font-family: 'Clash Display', serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 0.5;
+    margin-bottom: 2rem;
+    opacity: 0.3;
+}
+
+.testimonial-quote {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 3rem;
+    letter-spacing: -0.01em;
+}
+
+.testimonial-quote em {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 4rem;
+}
+
+.author-avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.author-name {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.author-title {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Metrics bar */
+.metrics-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.metric-value {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.metric-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.metric-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonial {
+        padding: 6rem 0;
+    }
+
+    .quote-mark {
+        font-size: 5rem;
+    }
+
+    .metrics-bar {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+
+    .metric-divider {
+        display: none;
+    }
+}

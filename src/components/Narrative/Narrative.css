@@ -1,0 +1,150 @@
+.narrative {
+    padding: 10rem 0;
+    background: var(--surface);
+}
+
+/* Section label */
+.section-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.section-label.accent {
+    color: var(--accent);
+}
+
+/* Header */
+.narrative-header {
+    margin-bottom: 5rem;
+}
+
+.narrative-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+}
+
+.narrative-title .strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 3px;
+    opacity: 0.6;
+}
+
+/* Problem grid */
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 6rem;
+}
+
+.problem-card {
+    padding: 2.5rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    transition: all 0.4s var(--ease-out);
+    position: relative;
+}
+
+.problem-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-dim), transparent);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out);
+}
+
+.problem-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.problem-card:hover::before {
+    opacity: 1;
+}
+
+.problem-number {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+.problem-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.problem-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Solution */
+.solution {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.solution-line {
+    width: 1px;
+    height: 100%;
+    min-height: 200px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.solution-content {
+    max-width: 600px;
+}
+
+.solution-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.solution-title .accent {
+    color: var(--accent);
+}
+
+.solution-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .problem-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .narrative {
+        padding: 6rem 0;
+    }
+
+    .solution {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .solution-line {
+        width: 60px;
+        height: 1px;
+        min-height: auto;
+    }
+}

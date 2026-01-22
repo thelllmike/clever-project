@@ -1,0 +1,137 @@
+.capabilities {
+    padding: 6rem 0;
+    background: rgba(15, 15, 20, 0.85);
+}
+
+.capabilities-header {
+    margin-bottom: 5rem;
+}
+
+.capabilities-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+}
+
+.capabilities-title .accent {
+    color: var(--accent);
+}
+
+/* Bento grid */
+.cap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+}
+
+.cap-card {
+    position: relative;
+    padding: 2.5rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    transition: all 0.4s var(--ease-out);
+}
+
+.cap-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+}
+
+.cap-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+}
+
+.cap-card:hover::before {
+    transform: scaleX(1);
+}
+
+.cap-card.featured {
+    grid-row: span 2;
+    background: linear-gradient(135deg, var(--elevated), var(--void));
+}
+
+.cap-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s var(--ease-out);
+}
+
+.cap-card:hover .cap-icon {
+    background: var(--accent);
+    color: var(--void);
+}
+
+.cap-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.cap-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Tool marquee */
+/* Tool curved loop customization */
+.capabilities-loop-text {
+    fill: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 4rem;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+}
+
+.curved-loop-jacket {
+    margin: 4rem 0;
+    /* Fade edges */
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+@media (max-width: 768px) {
+    .capabilities-loop-text {
+        font-size: 2.5rem;
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .cap-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cap-card.featured {
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .capabilities {
+        padding: 4rem 0;
+    }
+
+    .cap-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cap-card {
+        padding: 2rem;
+    }
+}

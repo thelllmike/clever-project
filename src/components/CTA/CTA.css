@@ -1,0 +1,149 @@
+.cta {
+    padding: 10rem 0;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+}
+
+.cta-content {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.cta-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+}
+
+.cta-title .text-muted {
+    color: var(--text-muted);
+}
+
+/* Form */
+.cta-form {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    position: relative;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.cta-form input,
+.cta-form select {
+    padding: 1rem 1.25rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s var(--ease-out);
+    appearance: none;
+}
+
+.cta-form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23606060' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 3rem;
+    cursor: pointer;
+}
+
+.cta-form input:focus,
+.cta-form select:focus {
+    border-color: var(--accent);
+}
+
+.cta-form input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.form-note {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.form-note a {
+    color: var(--accent);
+    transition: opacity 0.3s;
+}
+
+.form-note a:hover {
+    opacity: 0.7;
+}
+
+/* Quick links */
+.cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+}
+
+.cta-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+}
+
+.cta-link i {
+    font-size: 1.25rem;
+}
+
+.cta-link:hover {
+    color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cta {
+        padding: 6rem 0;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

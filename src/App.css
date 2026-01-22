@@ -1,0 +1,31 @@
+/* Dither Background Layout */
+.app-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.dither-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+.content-layer {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Re-enable pointer events for interactive elements */
+.content-layer header,
+.content-layer main,
+.content-layer footer,
+.content-layer a,
+.content-layer button,
+.content-layer input,
+.content-layer [role="button"] {
+    pointer-events: auto;
+}

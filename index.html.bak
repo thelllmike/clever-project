@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGENXY.MEDIA | Visual Transformation Studio</title>
+    <meta name="description"
+        content="Personal-led creative studio by Aryan Sharma. Raw footage to high-impact content.">
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&f[]=satoshi@300,400,500,700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           DESIGN BRIEF EXECUTION
+           -----------------------------------------
+           Aesthetic: Neo-Brutalist Technical
+           Theme: Dark (#0a0a0f base)
+           Accent: Acid Green (#D4FF00)
+           Headlines: Clash Display
+           Body: Satoshi
+           Key Interaction: Sticky timeline scroll
+           ========================================= */
+
+        :root {
+            --bg-void: #0a0a0f;
+            --bg-surface: #12121a;
+            --bg-elevated: #1a1a24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #606060;
+            --accent: #D4FF00;
+            --accent-dim: rgba(212, 255, 0, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.15);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Satoshi', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* TYPOGRAPHY */
+        h1,
+        h2,
+        h3,
+        .heading {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .text-muted {
+            color: var(--text-secondary);
+        }
+
+        /* LAYOUT */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(1.5rem, 5vw, 4rem);
+        }
+
+        section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* LINKS & BUTTONS */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--border-strong);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.4s var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s var(--ease-out);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-void);
+            border-color: var(--accent);
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-void);
+            border-color: var(--accent);
+        }
+
+        .btn-primary::before {
+            background: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            color: var(--bg-void);
+        }
+
+        /* =========================================
+           HEADER / NAV
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.9), transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 2rem;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 0.2s var(--ease-out) forwards;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 7vw, 8rem);
+            line-height: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title span {
+            display: block;
+            opacity: 0;
+            animation: fadeSlideUp 1s var(--ease-out) forwards;
+        }
+
+        .hero-title span:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .hero-title span:nth-child(2) {
+            animation-delay: 0.45s;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--text-primary);
+        }
+
+        .hero-title span:nth-child(3) {
+            animation-delay: 0.6s;
+            color: var(--accent);
+        }
+
+        .hero-description {
+            max-width: 500px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 0.8s var(--ease-out) forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 1s var(--ease-out) forwards;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            animation: fadeSlideUp 0.8s 1.2s var(--ease-out) forwards;
+        }
+
+        .stat-number {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* =========================================
+           PROBLEM → SOLUTION (STICKY SCROLL)
+           ========================================= */
+        .narrative {
+            padding: 10rem 0;
+            background: var(--bg-surface);
+        }
+
+        .narrative-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .narrative-sticky {
+            position: sticky;
+            top: 30vh;
+        }
+
+        .narrative-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .narrative-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .narrative-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .scenario-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .scenario {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            background: var(--bg-elevated);
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .scenario:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .scenario-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            background: var(--accent-dim);
+            margin-bottom: 1rem;
+        }
+
+        .scenario h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           WORK / PORTFOLIO
+           ========================================= */
+        .work {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        .work-grid {
+            display: grid;
+            gap: 1px;
+            background: var(--border);
+        }
+
+        .work-item {
+            background: var(--bg-void);
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 3rem;
+            align-items: center;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .work-item:hover {
+            background: var(--bg-surface);
+        }
+
+        .work-index {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 200;
+            color: var(--text-muted);
+            min-width: 80px;
+        }
+
+        .work-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .work-item:hover .work-content h3 {
+            color: var(--accent);
+        }
+
+        .work-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .work-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .work-arrow {
+            font-size: 2rem;
+            color: var(--text-muted);
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .work-item:hover .work-arrow {
+            color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        /* =========================================
+           CAPABILITIES / TECH
+           ========================================= */
+        .capabilities {
+            padding: 8rem 0;
+            background: var(--bg-surface);
+        }
+
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .cap-card {
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            background: var(--bg-void);
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .cap-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .cap-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .cap-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cap-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* TOOL MARQUEE */
+        .tool-marquee {
+            overflow: hidden;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 600;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-muted);
+            padding: 0 3rem;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* =========================================
+           TESTIMONIAL
+           ========================================= */
+        .testimonial {
+            padding: 10rem 0;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .testimonial-info strong {
+            display: block;
+            font-family: 'Clash Display';
+        }
+
+        .testimonial-info span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           CTA / CONVERSION
+           ========================================= */
+        .cta-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--bg-surface), var(--bg-void));
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem 1.5rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: 'Satoshi', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .cta-form input:focus {
+            border-color: var(--accent);
+        }
+
+        .cta-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* =========================================
+           ANIMATIONS
+           ========================================= */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .narrative-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .narrative-sticky {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .work-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .work-index {
+                font-size: 1.5rem;
+            }
+
+            .work-arrow {
+                display: none;
+            }
+
+            .cta-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav class="nav">
+                <a href="#">
+                    <img src="PNG AGENXY.png" alt="AGENXY.MEDIA" class="logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#work" class="nav-link">Work</a></li>
+                    <li><a href="#capabilities" class="nav-link">Capabilities</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn">Start Project</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-eyebrow">Visual Transformation Studio</div>
+            <h1 class="hero-title">
+                <span>WE DON'T</span>
+                <span>JUST EDIT</span>
+                <span>WE TRANSFORM.</span>
+            </h1>
+            <p class="hero-description">
+                Personal-led creative studio by <strong>Aryan Sharma</strong>. Turning average footage into high-impact
+                content that performs.
+            </p>
+            <div class="hero-cta">
+                <a href="#work" class="btn btn-primary">View Work <i class="ri-arrow-right-line"></i></a>
+                <a href="#contact" class="btn">Book Consultation</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Views Generated</div>
+                </div>
+                <div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects Delivered</div>
+                </div>
+                <div>
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Revisions Included</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NARRATIVE -->
+    <section class="narrative">
+        <div class="container">
+            <div class="narrative-grid">
+                <div class="narrative-sticky">
+                    <div class="narrative-label">The Problem</div>
+                    <h2 class="narrative-title">Your content deserves better than "good enough."</h2>
+                    <p class="narrative-text">
+                        You're creating. But the edit doesn't match the vision. Sound feels off. Pacing drags. The
+                        before-and-after? Invisible. That's where transformation begins.
+                    </p>
+                </div>
+                <div class="scenario-list">
+                    <div class="scenario">
+                        <div class="scenario-icon"><i class="ri-time-line"></i></div>
+                        <h4>You're spending hours on edits</h4>
+                        <p>Time you could spend creating more content, building your brand, or actually living.</p>
+                    </div>
+                    <div class="scenario">
+                        <div class="scenario-icon"><i class="ri-emotion-unhappy-line"></i></div>
+                        <h4>Your videos don't feel "premium"</h4>
+                        <p>Something's missing. The pacing, the sound, the visual polish. It looks... amateur.</p>
+                    </div>
+                    <div class="scenario">
+                        <div class="scenario-icon"><i class="ri-line-chart-line"></i></div>
+                        <h4>Retention drops at the 30-second mark</h4>
+                        <p>The hook isn't hooking. The edit isn't optimized. You're losing viewers before the value
+                            hits.</p>
+                    </div>
+                    <div class="scenario">
+                        <div class="scenario-icon"><i class="ri-check-double-line"></i></div>
+                        <h4>The Solution: Visual Transformation</h4>
+                        <p>Raw input. Proven process. High-impact output. We show the before. We prove the after. Let
+                            the work speak.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="work">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Selected Work</h2>
+                <a href="https://drive.google.com/drive/folders/1RJ9J3ZQAHWlyDXyg43mF1DDZFYRB2HfD" target="_blank"
+                    class="btn">Full Portfolio <i class="ri-external-link-line"></i></a>
+            </div>
+            <div class="work-grid">
+                <a href="https://www.instagram.com/froztmuzic" target="_blank" class="work-item">
+                    <div class="work-index">01</div>
+                    <div class="work-content">
+                        <h3>FROZT MUZIC</h3>
+                        <div class="work-meta">
+                            <span class="work-tag">Music Visuals</span>
+                            <span class="work-tag">1M+ Reach</span>
+                        </div>
+                    </div>
+                    <i class="ri-arrow-right-up-line work-arrow"></i>
+                </a>
+                <a href="https://www.instagram.com/agenxy.media" target="_blank" class="work-item">
+                    <div class="work-index">02</div>
+                    <div class="work-content">
+                        <h3>AGENXY CLIENTS</h3>
+                        <div class="work-meta">
+                            <span class="work-tag">Agency Work</span>
+                            <span class="work-tag">Brand Content</span>
+                        </div>
+                    </div>
+                    <i class="ri-arrow-right-up-line work-arrow"></i>
+                </a>
+                <a href="https://www.instagram.com/ai.with.100" target="_blank" class="work-item">
+                    <div class="work-index">03</div>
+                    <div class="work-content">
+                        <h3>AI TRANSFORMATIONS</h3>
+                        <div class="work-meta">
+                            <span class="work-tag">HeyGen AI</span>
+                            <span class="work-tag">Post-Production</span>
+                        </div>
+                    </div>
+                    <i class="ri-arrow-right-up-line work-arrow"></i>
+                </a>
+                <a href="https://www.instagram.com/b_mahir22" target="_blank" class="work-item">
+                    <div class="work-index">04</div>
+                    <div class="work-content">
+                        <h3>B_MAHIR22</h3>
+                        <div class="work-meta">
+                            <span class="work-tag">Short Form</span>
+                            <span class="work-tag">Viral Reels</span>
+                        </div>
+                    </div>
+                    <i class="ri-arrow-right-up-line work-arrow"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section id="capabilities" class="capabilities">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Capabilities</h2>
+            </div>
+            <div class="cap-grid">
+                <div class="cap-card">
+                    <i class="ri-film-line"></i>
+                    <h4>Core Editing</h4>
+                    <p>Premiere Pro & DaVinci Resolve. Narrative pacing, color grading, and audio mixing that elevates
+                        every frame.</p>
+                </div>
+                <div class="cap-card">
+                    <i class="ri-magic-line"></i>
+                    <h4>Motion & VFX</h4>
+                    <p>After Effects mastery. Custom motion graphics, compositing, and visual effects for premium
+                        production value.</p>
+                </div>
+                <div class="cap-card">
+                    <i class="ri-smartphone-line"></i>
+                    <h4>Short-Form</h4>
+                    <p>Reels, TikToks, Shorts. Hook-driven editing with retention-optimized pacing and captions.</p>
+                </div>
+                <div class="cap-card">
+                    <i class="ri-brain-line"></i>
+                    <h4>AI Enhancement</h4>
+                    <p>AI upscaling, art generation, and intelligent compression. Modern tools for modern creators.</p>
+                </div>
+                <div class="cap-card">
+                    <i class="ri-sound-module-line"></i>
+                    <h4>Sound Design</h4>
+                    <p>Audio is half the experience. We mix, master, and design soundscapes that hit.</p>
+                </div>
+                <div class="cap-card">
+                    <i class="ri-image-line"></i>
+                    <h4>Thumbnails</h4>
+                    <p>Click-worthy thumbnails designed for CTR. Photoshop-crafted, A/B tested concepts.</p>
+                </div>
+            </div>
+            <div class="tool-marquee">
+                <div class="marquee-track">
+                    <span class="marquee-item">PREMIERE PRO</span>
+                    <span class="marquee-item">AFTER EFFECTS</span>
+                    <span class="marquee-item">DAVINCI RESOLVE</span>
+                    <span class="marquee-item">PHOTOSHOP</span>
+                    <span class="marquee-item">SOUND DESIGN</span>
+                    <span class="marquee-item">PREMIERE PRO</span>
+                    <span class="marquee-item">AFTER EFFECTS</span>
+                    <span class="marquee-item">DAVINCI RESOLVE</span>
+                    <span class="marquee-item">PHOTOSHOP</span>
+                    <span class="marquee-item">SOUND DESIGN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <section class="testimonial">
+        <div class="container">
+            <p class="testimonial-quote">
+                "Aryan doesn't just edit—he understands what makes content perform. My videos went from 'fine' to
+                genuinely scroll-stopping."
+            </p>
+            <div class="testimonial-author">
+                <div class="testimonial-avatar"><i class="ri-user-3-line"></i></div>
+                <div class="testimonial-info">
+                    <strong>Creator Client</strong>
+                    <span>YouTube • 100K+ Subscribers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to <span class="text-accent">Transform?</span></h2>
+            <p class="cta-subtitle">
+                Let's talk about your next project. No pitch decks. Just craft.
+            </p>
+            <form class="cta-form" action="mailto:contact@agenxy.media" method="get" enctype="text/plain">
+                <input type="email" name="email" placeholder="Your email" required>
+                <button type="submit" class="btn btn-primary">Start Conversation</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-copy">
+                    © 2024 AGENXY.MEDIA — Designed by Aryan Sharma
+                </div>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/agenxy.media" target="_blank" class="footer-link">Instagram</a>
+                    <a href="mailto:contact@agenxy.media" class="footer-link">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

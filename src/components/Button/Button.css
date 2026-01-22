@@ -1,0 +1,97 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-family: 'Clash Display', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out-expo);
+    z-index: -1;
+}
+
+.btn:hover {
+    color: var(--void);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.btn:hover::before {
+    transform: scaleX(1);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--void);
+    border-color: var(--accent);
+}
+
+.btn-primary::before {
+    background: var(--text);
+}
+
+.btn-primary:hover {
+    color: var(--void);
+}
+
+.btn-ghost {
+    border-color: transparent;
+    padding: 0.75rem 0;
+}
+
+.btn-ghost::before {
+    display: none;
+}
+
+.btn-ghost::after {
+    content: '';
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.4s var(--ease-out);
+}
+
+.btn-ghost:hover {
+    color: var(--accent);
+    transform: none;
+    border-color: transparent;
+}
+
+.btn-ghost:hover::after {
+    width: 100%;
+}
+
+/* Magnetic button effect applied via JS */
+.btn-magnetic {
+    transition: transform 0.3s var(--ease-out);
+}
+
+.btn i {
+    font-size: 1.1em;
+    transition: transform 0.3s var(--ease-out);
+}
+
+.btn:hover i {
+    transform: translateX(4px);
+}
