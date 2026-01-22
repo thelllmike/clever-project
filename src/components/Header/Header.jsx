@@ -46,7 +46,7 @@ function Header() {
                             <span className="status-dot"></span>
                             <span className="mono">Available</span>
                         </span>
-                        <Button href="#contact" variant="primary">
+                        <Button href="https://forms.gle/fVeCoSrFoSi55Mww9" target="_blank" rel="noopener noreferrer" variant="primary">
                             Start Project
                         </Button>
                     </div>
