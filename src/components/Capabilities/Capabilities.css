@@ -1,5 +1,5 @@
 .capabilities {
-    padding: 6rem 0;
+    padding: 6rem 0 0;
     background: rgba(15, 15, 20, 0.85);
 }
 
@@ -99,7 +99,7 @@
 }
 
 .curved-loop-jacket {
-    margin: 4rem 0;
+    margin: 4rem 0 0;
     /* Fade edges */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
