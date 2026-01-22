@@ -45,7 +45,7 @@ function Footer() {
                             <span className="footer-col-title mono">Connect</span>
                             <a href="https://www.instagram.com/agenxy.media" target="_blank" rel="noopener noreferrer">Instagram</a>
                             <a href="mailto:aryanjohnsharma@gmail.com">Email</a>
-                            <a href="https://www.fiverr.com" target="_blank" rel="noopener noreferrer">Fiverr</a>
+                            <a href="https://www.fiverr.com/s/pdm182G" target="_blank" rel="noopener noreferrer">Fiverr</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ function Footer() {
                 {/* Bottom bar */}
                 <div className="footer-bottom reveal reveal-delay-1">
                     <div className="footer-copy mono">
-                        © 2024 AGENXY.MEDIA
+                        © 2026 AGENXY.MEDIA | Designed by Aryan
                     </div>
                     <div className="footer-location mono">
                         <i className="ri-map-pin-line"></i>
