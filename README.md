@@ -1,4 +1,4 @@
-# ✨ AGENXY.  MEDIA
+# AGENXY.MEDIA
 
 **The digital media powerhouse. ** Where ambition meets execution. Where vision becomes reality.  AGENXY.MEDIA isn't just another agency—we're the firm that closes deals others can't even open.
 
