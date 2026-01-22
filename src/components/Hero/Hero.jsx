@@ -25,12 +25,6 @@ function Hero() {
         <section className="hero" ref={heroRef}>
             <div className="hero-spotlight"></div>
 
-            {/* Film frame counter */}
-            <div className="hero-frame-counter mono">
-                <span className="frame-label">FRAME</span>
-                <span className="frame-number">00:00:24:16</span>
-            </div>
-
             <div className="container">
                 <div className="hero-content">
                     {/* Eyebrow */}
