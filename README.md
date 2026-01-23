@@ -41,7 +41,9 @@ AGENXY-MEDIA/
 **We don't accept mediocre PRs.  Make it count.**
 
 ## 📄 The Fine Print
-
+NOTE: this code was written by Claude Code using Opus 4.5 and tested carefully (both hand-tested and tested against
+the original implementation in a synthetic way).
+A code review was independently performed by codex/GPT5.2.
 This project operates under the MIT License. Do what you want with it—but do it well.
 
 ## The Links
