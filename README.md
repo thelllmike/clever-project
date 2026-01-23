@@ -53,5 +53,5 @@ This project operates under the MIT License. Do what you want with it—but do i
 ---
 
 <div align="center">
-AGENXY.MEDIA
+AGENXY.MEDIA Landing Page - Designed by Aryan
 </div>
