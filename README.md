@@ -23,15 +23,7 @@ When it comes to tools, we use the best in the business:
 - **Build Tool**: Vite — *Deploy faster than your competition*
 - **Deployment**: Vercel — *Enterprise-grade infrastructure*
 
-### By The Numbers
-- JavaScript: 53. 4 KB
-- CSS: 37.6 KB  
-- HTML: 780 B
-
-*Lean. Mean. Efficient.*
-
-## 📁 The Organization
-A firm runs on structure. Here's ours:
+## 📁 The Folder Structure
 ```
 AGENXY-MEDIA/
 ├── src/                    # Where the magic happens
@@ -61,5 +53,5 @@ This project operates under the MIT License. Do what you want with it—but do i
 ---
 
 <div align="center">
-**AGENXY.MEDIA**
+AGENXY.MEDIA
 </div>
