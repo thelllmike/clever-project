@@ -4,10 +4,20 @@ import CurvedLoop from '../CurvedLoop'
 
 const capabilities = [
     {
+        icon: 'ri-store-2-line',
+        title: 'POS Development',
+        description: 'Custom Point of Sale systems with inventory management, billing, and real-time analytics.',
+        featured: true
+    },
+    {
+        icon: 'ri-flow-chart',
+        title: 'Business Workflow Automation',
+        description: 'Streamline operations with custom CRM, ERP, and AI-driven workflow automation solutions.'
+    },
+    {
         icon: 'ri-code-s-slash-line',
         title: 'Web Development',
-        description: 'React, Next.js & Node.js. Pixel-perfect, high-performance web applications.',
-        featured: true
+        description: 'React, Next.js & Node.js. Pixel-perfect, high-performance web applications.'
     },
     {
         icon: 'ri-brain-line',
@@ -15,19 +25,19 @@ const capabilities = [
         description: 'Machine learning, computer vision, and intelligent automation for your business.'
     },
     {
-        icon: 'ri-links-line',
-        title: 'Blockchain',
-        description: 'Smart contracts, DApps, and Web3 solutions built on Solidity.'
-    },
-    {
         icon: 'ri-smartphone-line',
         title: 'Mobile Apps',
         description: 'Cross-platform mobile applications with Flutter and React Native.'
     },
     {
-        icon: 'ri-box-3-line',
-        title: '3D & Interactive',
-        description: 'Three.js and WebGL experiences that captivate and engage users.'
+        icon: 'ri-shopping-bag-line',
+        title: 'E-Commerce',
+        description: 'Full-stack e-commerce platforms with payment integration and AI-powered recommendations.'
+    },
+    {
+        icon: 'ri-links-line',
+        title: 'Blockchain',
+        description: 'Smart contracts, DApps, and Web3 solutions built on Solidity.'
     },
     {
         icon: 'ri-cloud-line',
