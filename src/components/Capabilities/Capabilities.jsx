@@ -4,39 +4,39 @@ import CurvedLoop from '../CurvedLoop'
 
 const capabilities = [
     {
-        icon: 'ri-film-line',
-        title: 'Precision Editing',
-        description: 'Premiere Pro & DaVinci Resolve. Narrative pacing that keeps viewers watching.',
+        icon: 'ri-code-s-slash-line',
+        title: 'Web Development',
+        description: 'React, Next.js & Node.js. Pixel-perfect, high-performance web applications.',
         featured: true
     },
     {
-        icon: 'ri-magic-line',
-        title: 'Motion & VFX',
-        description: 'After Effects mastery. Custom graphics that elevate production value.'
+        icon: 'ri-brain-line',
+        title: 'AI Solutions',
+        description: 'Machine learning, computer vision, and intelligent automation for your business.'
+    },
+    {
+        icon: 'ri-links-line',
+        title: 'Blockchain',
+        description: 'Smart contracts, DApps, and Web3 solutions built on Solidity.'
     },
     {
         icon: 'ri-smartphone-line',
-        title: 'Short-Form',
-        description: 'Reels, TikToks, Shorts. Hook-driven with retention-optimized pacing.'
+        title: 'Mobile Apps',
+        description: 'Cross-platform mobile applications with Flutter and React Native.'
     },
     {
-        icon: 'ri-brain-line',
-        title: 'AI Enhancement',
-        description: 'Upscaling, noise reduction, intelligent compression. Modern tools.'
+        icon: 'ri-box-3-line',
+        title: '3D & Interactive',
+        description: 'Three.js and WebGL experiences that captivate and engage users.'
     },
     {
-        icon: 'ri-sound-module-line',
-        title: 'Sound Design',
-        description: 'Audio is half the experience. We mix soundscapes that hit.'
-    },
-    {
-        icon: 'ri-image-line',
-        title: 'Thumbnails',
-        description: 'Click-worthy thumbnails designed for CTR. Photoshop-crafted.'
+        icon: 'ri-cloud-line',
+        title: 'Cloud & DevOps',
+        description: 'AWS deployment, Docker containers, and CI/CD pipelines for scale.'
     }
 ]
 
-const tools = ['PREMIERE PRO', 'AFTER EFFECTS', 'DAVINCI RESOLVE', 'PHOTOSHOP', 'TOPAZ AI', 'CAPCUT']
+const tools = ['REACT', 'NEXT.JS', 'NODE.JS', 'THREE.JS', 'PYTHON', 'SOLIDITY', 'AWS', 'DOCKER']
 
 function Capabilities() {
     const sectionRef = useRef(null)

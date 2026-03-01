@@ -15,7 +15,7 @@ function App() {
       {/* Dither Background - Full screen, receives pointer events */}
       <div className="dither-background">
         <Dither
-          waveColor={[0, 0.09803921568627451, 0.8392156862745098]}
+          waveColor={[0.486, 0.227, 0.929]}
           disableAnimation={false}
           enableMouseInteraction={true}
           mouseRadius={0.2}

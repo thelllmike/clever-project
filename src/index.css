@@ -21,12 +21,12 @@
     --text: #ffffff;
     --text-secondary: #a0a0a0;
     --text-muted: #9a9aa8;
-    --accent: #D4FF00;
-    --accent-dim: rgba(212, 255, 0, 0.08);
-    --accent-glow: rgba(212, 255, 0, 0.15);
+    --accent: #7C3AED;
+    --accent-dim: rgba(124, 58, 237, 0.08);
+    --accent-glow: rgba(124, 58, 237, 0.15);
     --border: rgba(255, 255, 255, 0.06);
     --border-strong: rgba(255, 255, 255, 0.12);
-    --gradient-spotlight: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 255, 0, 0.04), transparent 40%);
+    --gradient-spotlight: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 58, 237, 0.04), transparent 40%);
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
     --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);

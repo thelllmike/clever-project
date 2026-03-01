@@ -31,9 +31,9 @@ function Testimonial() {
 
                     {/* Quote */}
                     <blockquote className="testimonial-quote reveal reveal-delay-1">
-                        The edit doesn't just look better—it <em>performs</em> better.
-                        My videos went from 'fine' to genuinely scroll-stopping.
-                        That's rare.
+                        The app doesn't just work—it <em>performs</em> flawlessly.
+                        Clever Project turned our concept into a production-ready product
+                        faster than we imagined.
                     </blockquote>
 
                     {/* Author */}
@@ -42,8 +42,8 @@ function Testimonial() {
                             <i className="ri-user-3-line"></i>
                         </div>
                         <div className="author-info">
-                            <span className="author-name">Creator Client</span>
-                            <span className="author-title mono">YouTube • 100K+ Subscribers</span>
+                            <span className="author-name">Startup Founder</span>
+                            <span className="author-title mono">SaaS • E-Commerce Platform</span>
                         </div>
                     </div>
 

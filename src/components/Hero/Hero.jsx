@@ -30,22 +30,22 @@ function Hero() {
                     {/* Eyebrow */}
                     <div className="hero-eyebrow">
                         <span className="eyebrow-line"></span>
-                        <span className="mono">Visual Transformation Studio</span>
+                        <span className="mono">Software Development Studio</span>
                     </div>
 
                     {/* Main title */}
                     <h1 className="hero-title">
                         <span className="title-line">
-                            <span className="title-word">RAW</span>
+                            <span className="title-word">IDEA</span>
                             <span className="title-arrow">→</span>
-                            <span className="title-word accent">REFINED</span>
+                            <span className="title-word accent">PRODUCT</span>
                         </span>
                     </h1>
 
                     {/* Subtitle */}
                     <p className="hero-subtitle">
-                        We don't polish videos. We transform them into
-                        <span className="highlight"> high-impact content</span> that performs.
+                        We don't just write code. We build
+                        <span className="highlight"> scalable digital solutions</span> that deliver results.
                     </p>
 
                     {/* CTA Group */}
@@ -60,15 +60,15 @@ function Hero() {
 
                     {/* Trust bar */}
                     <div className="hero-trust">
-                        <span className="trust-label mono">Trusted Tools</span>
+                        <span className="trust-label mono">Tech Stack</span>
                         <div className="trust-logos">
-                            <span className="trust-logo">Premiere Pro</span>
+                            <span className="trust-logo">React & Next.js</span>
                             <span className="trust-divider">•</span>
-                            <span className="trust-logo">After Effects</span>
+                            <span className="trust-logo">Node.js</span>
                             <span className="trust-divider">•</span>
-                            <span className="trust-logo">DaVinci Resolve</span>
+                            <span className="trust-logo">AI & Blockchain</span>
                             <span className="trust-divider">•</span>
-                            <span className="trust-logo">Photoshop</span>
+                            <span className="trust-logo">Three.js</span>
                         </div>
                     </div>
                 </div>
@@ -76,18 +76,18 @@ function Hero() {
                 {/* Stats strip */}
                 <div className="hero-stats">
                     <div className="stat">
-                        <span className="stat-number">1M+</span>
-                        <span className="stat-label mono">Views Generated</span>
-                    </div>
-                    <div className="stat-divider"></div>
-                    <div className="stat">
                         <span className="stat-number">50+</span>
                         <span className="stat-label mono">Projects Delivered</span>
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat">
-                        <span className="stat-number">∞</span>
-                        <span className="stat-label mono">Revisions Included</span>
+                        <span className="stat-number">30+</span>
+                        <span className="stat-label mono">Happy Clients</span>
+                    </div>
+                    <div className="stat-divider"></div>
+                    <div className="stat">
+                        <span className="stat-number">24/7</span>
+                        <span className="stat-label mono">Support Available</span>
                     </div>
                 </div>
             </div>

@@ -59,7 +59,7 @@ function Header() {
                 <div className="container">
                     <nav className="nav">
                         <a href="#" className="logo-link">
-                            <img src={logo} alt="AGENXY.MEDIA" className="logo" />
+                            <img src={logo} alt="Clever Project" className="logo" />
                         </a>
 
                         <div className="nav-center">
@@ -75,7 +75,7 @@ function Header() {
                                 <span className="status-dot"></span>
                                 <span className="mono">Available</span>
                             </span>
-                            <Button href="https://forms.gle/fVeCoSrFoSi55Mww9" target="_blank" rel="noopener noreferrer" variant="primary">
+                            <Button href="https://wa.me/94704057137" target="_blank" rel="noopener noreferrer" variant="primary">
                                 Start Project
                             </Button>
                         </div>
@@ -129,7 +129,7 @@ function Header() {
                             <span className="mono">Available for projects</span>
                         </div>
                         <Button
-                            href="https://forms.gle/fVeCoSrFoSi55Mww9"
+                            href="https://wa.me/94704057137"
                             target="_blank"
                             rel="noopener noreferrer"
                             variant="primary"

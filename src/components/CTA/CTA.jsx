@@ -28,33 +28,41 @@ function CTA() {
             <div className="cta-grid-bg"></div>
             <div className="container">
                 <div className="cta-content reveal">
-                    <span className="section-label mono">Ready to transform?</span>
+                    <span className="section-label mono">Ready to build?</span>
                     <h2 className="cta-title">
-                        Let's talk craft.<br />
-                        <span className="text-muted">Not pitch decks.</span>
+                        Let's talk solutions.<br />
+                        <span className="text-muted">Not just ideas.</span>
                     </h2>
                 </div>
 
                 <div className="cta-form reveal reveal-delay-1">
                     <div className="form-actions">
-                        <Button href="https://forms.gle/fVeCoSrFoSi55Mww9" target="_blank" rel="noopener noreferrer" variant="primary">
+                        <Button href="https://wa.me/94704057137" target="_blank" rel="noopener noreferrer" variant="primary">
                             Start Conversation <i className="ri-arrow-right-line"></i>
                         </Button>
                         <span className="form-note mono">
-                            or email directly: <a href="mailto:aryanjohnsharma@gmail.com">aryanjohnsharma@gmail.com</a>
+                            or email directly: <a href="mailto:info@cleverproject.lk">info@cleverproject.lk</a>
                         </span>
                     </div>
                 </div>
 
                 {/* Quick links */}
                 <div className="cta-links reveal reveal-delay-2">
-                    <a href="https://www.instagram.com/agenxy.media" target="_blank" rel="noopener noreferrer" className="cta-link">
+                    <a href="https://www.instagram.com/clever.project" target="_blank" rel="noopener noreferrer" className="cta-link">
                         <i className="ri-instagram-line"></i>
                         <span>Instagram</span>
                     </a>
-                    <a href="https://drive.google.com/drive/folders/1RJ9J3ZQAHWlyDXyg43mF1DDZFYRB2HfD" target="_blank" rel="noopener noreferrer" className="cta-link">
-                        <i className="ri-folder-line"></i>
-                        <span>Portfolio</span>
+                    <a href="https://www.facebook.com/cleverprojects" target="_blank" rel="noopener noreferrer" className="cta-link">
+                        <i className="ri-facebook-line"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/cleverprojects/" target="_blank" rel="noopener noreferrer" className="cta-link">
+                        <i className="ri-linkedin-line"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://wa.me/94704057137" target="_blank" rel="noopener noreferrer" className="cta-link">
+                        <i className="ri-whatsapp-line"></i>
+                        <span>WhatsApp</span>
                     </a>
                 </div>
             </div>

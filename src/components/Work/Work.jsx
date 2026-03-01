@@ -5,35 +5,35 @@ import Button from '../Button/Button'
 const workItems = [
     {
         index: '01',
-        title: 'FROZT MUZIC',
-        category: 'Music Visuals',
-        metric: '1M+ Reach',
-        href: 'https://www.instagram.com/froztmuzic',
-        description: 'Music visualization and rhythm-driven edits'
+        title: 'SECURITY MANAGEMENT APP',
+        category: 'Mobile App',
+        metric: 'Full-Stack',
+        href: 'https://www.instagram.com/clever.project',
+        description: 'Complete security operations app for daily management and team coordination'
     },
     {
         index: '02',
-        title: 'AGENXY CLIENTS BEFORE AND AFTER',
-        category: 'Agency Work',
-        metric: 'Brand Content',
-        href: 'https://www.instagram.com/agenxy.media',
-        description: 'Professional client content and campaigns'
+        title: 'E-COMMERCE PLATFORM',
+        category: 'Web Application',
+        metric: 'React & Node.js',
+        href: 'https://www.instagram.com/clever.project',
+        description: 'Scalable online store with payment integration and inventory management'
     },
     {
         index: '03',
-        title: 'AI-RAW VIDS TO EDITED VIDS',
-        category: 'AI Enhancement',
-        metric: 'HeyGen Post-Production',
-        href: 'https://www.instagram.com/ai.with.100',
-        description: 'Raw AI videos transformed into polished reels'
+        title: 'AI-POWERED ANALYTICS',
+        category: 'AI Solution',
+        metric: 'Machine Learning',
+        href: 'https://www.instagram.com/clever.project',
+        description: 'Intelligent data analytics platform with predictive insights'
     },
     {
         index: '04',
-        title: 'B_MAHIR22',
-        category: 'Short Form',
-        metric: 'Viral Reels',
-        href: 'https://www.instagram.com/b_mahir22',
-        description: 'Hook-driven content with retention optimization'
+        title: 'BLOCKCHAIN DAPP',
+        category: 'Web3',
+        metric: 'Solidity & React',
+        href: 'https://www.instagram.com/clever.project',
+        description: 'Decentralized application with smart contracts and token integration'
     }
 ]
 
@@ -65,15 +65,15 @@ function Work() {
                     <div className="work-header-left">
                         <span className="section-label mono">Selected Work</span>
                         <h2 className="work-title">
-                            Transformations<br />
-                            <span className="text-muted">that perform</span>
+                            Projects<br />
+                            <span className="text-muted">that deliver</span>
                         </h2>
                     </div>
                     <Button
-                        href="https://drive.google.com/drive/folders/1RJ9J3ZQAHWlyDXyg43mF1DDZFYRB2HfD"
+                        href="https://www.cleverproject.lk"
                         target="_blank"
                     >
-                        Full Portfolio <i className="ri-external-link-line"></i>
+                        All Projects <i className="ri-external-link-line"></i>
                     </Button>
                 </div>
 

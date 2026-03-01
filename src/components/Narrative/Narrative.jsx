@@ -4,18 +4,18 @@ import './Narrative.css'
 const problems = [
     {
         number: '01',
-        title: "Hours lost to editing",
-        description: "Time you could spend creating, building your brand, or actually living your life."
+        title: "Outdated tech holding you back",
+        description: "Legacy systems slow your business down. You need modern solutions that scale with your growth."
     },
     {
         number: '02',
-        title: "Videos that don't feel 'premium'",
-        description: "The pacing's off. Sound is muddy. Something's missing—and viewers notice."
+        title: "Software that doesn't convert",
+        description: "Poor UX, slow performance, broken flows—your users leave before they see the value."
     },
     {
         number: '03',
-        title: "Retention drops at 30 seconds",
-        description: "The hook isn't hooking. You're losing viewers before the value hits."
+        title: "No in-house development team",
+        description: "Hiring is expensive and slow. You need a trusted partner who delivers production-ready code."
     }
 ]
 
@@ -47,7 +47,7 @@ function Narrative() {
                 <div className="narrative-header reveal">
                     <span className="section-label mono">The Problem</span>
                     <h2 className="narrative-title">
-                        Your content deserves<br />
+                        Your business deserves<br />
                         better than <span className="strike">good enough</span>
                     </h2>
                 </div>
@@ -72,12 +72,12 @@ function Narrative() {
                     <div className="solution-content">
                         <span className="section-label mono accent">The Solution</span>
                         <h3 className="solution-title">
-                            Raw input. Proven process.<br />
-                            <span className="accent">High-impact output.</span>
+                            Your vision. Our expertise.<br />
+                            <span className="accent">World-class digital products.</span>
                         </h3>
                         <p className="solution-desc">
-                            We take your footage and transform it through a precision-driven workflow.
-                            No gimmicks. No over-editing. Just content that performs.
+                            We take your ideas and transform them through a precision-driven development process.
+                            No bloat. No shortcuts. Just software that performs.
                         </p>
                     </div>
                 </div>
