@@ -221,6 +221,11 @@ a {
     }
 }
 
+/* COUNT UP */
+.count-up-text {
+    font-variant-numeric: tabular-nums;
+}
+
 /* SELECTION */
 ::selection {
     background: var(--accent);

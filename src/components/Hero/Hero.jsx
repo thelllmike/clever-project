@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './Hero.css'
 import Button from '../Button/Button'
+import CountUp from '../CountUp'
 
 function Hero() {
     const heroRef = useRef(null)
@@ -76,12 +77,12 @@ function Hero() {
                 {/* Stats strip */}
                 <div className="hero-stats">
                     <div className="stat">
-                        <span className="stat-number">50+</span>
+                        <span className="stat-number"><CountUp from={0} to={50} duration={2} className="count-up-text" />+</span>
                         <span className="stat-label mono">Projects Delivered</span>
                     </div>
                     <div className="stat-divider"></div>
                     <div className="stat">
-                        <span className="stat-number">30+</span>
+                        <span className="stat-number"><CountUp from={0} to={30} duration={2} className="count-up-text" />+</span>
                         <span className="stat-label mono">Happy Clients</span>
                     </div>
                     <div className="stat-divider"></div>

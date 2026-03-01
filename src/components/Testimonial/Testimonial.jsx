@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Testimonial.css'
+import CountUp from '../CountUp'
 
 function Testimonial() {
     const sectionRef = useRef(null)
@@ -50,17 +51,17 @@ function Testimonial() {
                     {/* Metrics bar */}
                     <div className="metrics-bar reveal reveal-delay-3">
                         <div className="metric-item">
-                            <span className="metric-value">4.9</span>
+                            <span className="metric-value"><CountUp from={0} to={4.9} duration={2} className="count-up-text" /></span>
                             <span className="metric-label mono">Avg. Rating</span>
                         </div>
                         <div className="metric-divider"></div>
                         <div className="metric-item">
-                            <span className="metric-value">24h</span>
+                            <span className="metric-value"><CountUp from={0} to={24} duration={1.5} className="count-up-text" />h</span>
                             <span className="metric-label mono">Avg. Turnaround</span>
                         </div>
                         <div className="metric-divider"></div>
                         <div className="metric-item">
-                            <span className="metric-value">100%</span>
+                            <span className="metric-value"><CountUp from={0} to={100} duration={2} className="count-up-text" />%</span>
                             <span className="metric-label mono">Client Satisfaction</span>
                         </div>
                     </div>
