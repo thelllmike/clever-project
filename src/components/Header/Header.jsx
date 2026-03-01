@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Header.css'
 import GlassSurface from '../GlassSurface'
 import Button from '../Button/Button'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo-white.svg'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)

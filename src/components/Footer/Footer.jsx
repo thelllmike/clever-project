@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Footer.css'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo-white.svg'
 
 function Footer() {
     const footerRef = useRef(null)
