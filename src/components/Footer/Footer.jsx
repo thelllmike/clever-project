@@ -29,7 +29,13 @@ function Footer() {
                 {/* Main footer content */}
                 <div className="footer-main reveal">
                     <div className="footer-brand">
-                        <img src={logo} alt="Clever Project" className="footer-logo" />
+                        <div className="footer-logo-group">
+                            <img src={logo} alt="Clever Project" className="footer-logo" />
+                            <span className="footer-logo-text">
+                                <span className="footer-logo-top">CLEVER</span>
+                                <span className="footer-logo-bottom">PROJECT</span>
+                            </span>
+                        </div>
                         <p className="footer-tagline">Software Development Studio</p>
                     </div>
 

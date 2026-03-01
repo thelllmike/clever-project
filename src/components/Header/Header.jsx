@@ -60,6 +60,10 @@ function Header() {
                     <nav className="nav">
                         <a href="#" className="logo-link">
                             <img src={logo} alt="Clever Project" className="logo" />
+                            <span className="logo-text">
+                                <span className="logo-text-top">CLEVER</span>
+                                <span className="logo-text-bottom">PROJECT</span>
+                            </span>
                         </a>
 
                         <div className="nav-center">

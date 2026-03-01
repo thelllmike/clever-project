@@ -19,13 +19,38 @@
 
 .logo-link {
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.6s 0.2s var(--ease-out) forwards;
 }
 
 .logo {
-    height: 3.5rem;
+    height: 2rem;
     display: block;
-    opacity: 0;
-    animation: fadeSlideUp 0.6s 0.2s var(--ease-out) forwards;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo-text-top {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text);
+}
+
+.logo-text-bottom {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
 }
 
 .nav-center {
@@ -280,7 +305,12 @@
 
 @media (max-width: 480px) {
     .logo {
-        height: 2.5rem;
+        height: 1.6rem;
+    }
+
+    .logo-text-top,
+    .logo-text-bottom {
+        font-size: 0.65rem;
     }
 
     .header {

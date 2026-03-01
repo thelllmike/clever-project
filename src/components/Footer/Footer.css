@@ -17,9 +17,39 @@
     max-width: 300px;
 }
 
-.footer-logo {
-    height: 2.5rem;
+.footer-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     margin-bottom: 1rem;
+}
+
+.footer-logo {
+    height: 1.8rem;
+    opacity: 0.8;
+}
+
+.footer-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.footer-logo-top {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    opacity: 0.8;
+}
+
+.footer-logo-bottom {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
     opacity: 0.8;
 }
 
