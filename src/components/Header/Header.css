@@ -95,8 +95,9 @@
 .status-dot {
     width: 6px;
     height: 6px;
-    background: var(--accent);
+    background: var(--status-yellow);
     border-radius: 50%;
+    box-shadow: 0 0 8px rgba(212, 255, 0, 0.6);
     animation: pulse 2s ease-in-out infinite;
 }
 

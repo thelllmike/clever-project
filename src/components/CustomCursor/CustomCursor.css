@@ -1,0 +1,92 @@
+/* Hide default cursor globally */
+*,
+*::before,
+*::after {
+    cursor: none !important;
+}
+
+/* Cursor ring - smooth follow */
+.custom-cursor-ring {
+    position: fixed;
+    top: -20px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #D4FF00;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    mix-blend-mode: difference;
+}
+
+.custom-cursor-ring.hovering {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: -30px;
+    border-color: #D4FF00;
+    background: rgba(212, 255, 0, 0.1);
+}
+
+.custom-cursor-ring.clicking {
+    width: 32px;
+    height: 32px;
+    top: -16px;
+    left: -16px;
+}
+
+/* Cursor dot - instant follow */
+.custom-cursor-dot {
+    position: fixed;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background: #D4FF00;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                top 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                left 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.custom-cursor-dot.hovering {
+    width: 4px;
+    height: 4px;
+    top: -2px;
+    left: -2px;
+    opacity: 0.5;
+}
+
+.custom-cursor-dot.clicking {
+    width: 12px;
+    height: 12px;
+    top: -6px;
+    left: -6px;
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none), (pointer: coarse) {
+    .custom-cursor-ring,
+    .custom-cursor-dot {
+        display: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        cursor: auto !important;
+    }
+}

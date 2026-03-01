@@ -1,4 +1,5 @@
 import Header from './components/Header/Header'
+import CustomCursor from './components/CustomCursor/CustomCursor'
 import Hero from './components/Hero/Hero'
 import Narrative from './components/Narrative/Narrative'
 import Work from './components/Work/Work'
@@ -12,6 +13,7 @@ import './App.css'
 function App() {
   return (
     <div className="app-container">
+      <CustomCursor />
       {/* Dither Background - Full screen, receives pointer events */}
       <div className="dither-background">
         <Dither
