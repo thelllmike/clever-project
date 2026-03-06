@@ -1,0 +1,712 @@
+/* ===== PROJECTS PAGE ===== */
+.projects-page {
+    width: 100%;
+    overflow-x: hidden;
+    background: var(--void);
+}
+
+/* Nav */
+.projects-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
+    pointer-events: none;
+}
+
+.projects-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    pointer-events: auto;
+    transition: all 0.4s var(--ease-out);
+    backdrop-filter: blur(12px);
+    text-decoration: none;
+}
+
+.projects-back-link:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    background: var(--accent-dim);
+}
+
+/* ===== INTRO & OUTRO - dark sections ===== */
+.projects-intro,
+.projects-outro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 6rem clamp(1.5rem, 5vw, 4rem);
+    text-align: center;
+    background: rgba(8, 8, 12, 0.85);
+    color: var(--text);
+}
+
+.projects-intro-title,
+.projects-outro-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 8rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+}
+
+.projects-intro-text,
+.projects-outro-text {
+    margin-top: 1rem;
+    max-width: 500px;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Scroll down indicator on intro */
+.projects-scroll-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeSlideUp 0.8s 1s var(--ease-out) forwards;
+}
+
+.projects-scroll-down span:last-child {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--status-yellow);
+}
+
+.scroll-down-mouse {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 32px;
+    border-radius: 999px;
+    border: 2px solid var(--status-yellow);
+}
+
+.scroll-down-wheel {
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    width: 2px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--status-yellow);
+    transform: translateX(-50%);
+    animation: wheel 1.1s infinite;
+}
+
+/* ===== PIN CARDS - dark themed ===== */
+.pin-card {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.pin-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: black;
+    opacity: 0;
+}
+
+.pin-card-inner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100vh;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 768px) {
+    .pin-card-inner {
+        flex-direction: row;
+        gap: 2.5rem;
+        padding: 10vh clamp(1.5rem, 6vw, 4rem);
+    }
+}
+
+.pin-card-number {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(4rem, 18vw, 8rem);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.25;
+}
+
+@media (min-width: 768px) {
+    .pin-card-number {
+        font-size: clamp(4rem, 8vw, 8rem);
+    }
+}
+
+.pin-card-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .pin-card-content {
+        width: 60%;
+    }
+}
+
+.pin-card-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(1.8rem, 9vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .pin-card-title {
+        font-size: clamp(1.8rem, 3.2vw, 3rem);
+        margin-bottom: 1.5rem;
+    }
+}
+
+.pin-card-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 2px;
+    border: 1px solid var(--border-strong);
+}
+
+.pin-card-image img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    max-height: min(420px, 46vh);
+}
+
+/* Description */
+.pin-card-desc {
+    margin-top: 1.25rem;
+    width: 100%;
+}
+
+.pin-card-desc-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-line;
+}
+
+.pin-card-readmore {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.pin-card-readmore > button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: 'Satoshi', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity 0.3s var(--ease-out);
+}
+
+.pin-card-readmore > button:hover {
+    opacity: 0.7;
+}
+
+/* Scroll hint */
+.projects-scroll-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--status-yellow);
+}
+
+.scroll-mouse {
+    display: inline-block;
+    position: relative;
+    width: 12px;
+    height: 18px;
+    border-radius: 999px;
+    border: 1px solid var(--status-yellow);
+}
+
+.scroll-wheel {
+    position: absolute;
+    left: 50%;
+    top: 3px;
+    width: 2px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--status-yellow);
+    transform: translateX(-50%);
+    animation: wheel 1.1s infinite;
+}
+
+@keyframes wheel {
+    0% { transform: translate(-50%, 0); opacity: 0.2; }
+    40% { opacity: 1; }
+    100% { transform: translate(-50%, 7px); opacity: 0.1; }
+}
+
+/* Right scroll hint (desktop only) */
+.pin-scroll-hint-right {
+    pointer-events: none;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+    .pin-scroll-hint-right {
+        display: flex;
+    }
+}
+
+.pin-scroll-hint-right .scroll-mouse-lg {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 28px;
+    border-radius: 999px;
+    border: 1px solid var(--status-yellow);
+    background: transparent;
+}
+
+.pin-scroll-hint-right .scroll-wheel-lg {
+    position: absolute;
+    left: 50%;
+    top: 5px;
+    width: 2px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--status-yellow);
+    transform: translateX(-50%);
+    animation: wheel 1.1s infinite;
+}
+
+.pin-scroll-hint-right span:last-child {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--status-yellow);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.pin-card-actions {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.pin-btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2px;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out);
+    text-decoration: none;
+}
+
+.pin-btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+}
+
+.pin-btn-primary:hover {
+    background: #6d28d9;
+    transform: translateY(-2px);
+}
+
+.pin-btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+}
+
+.pin-btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ===== MODALS - dark themed ===== */
+
+/* Video Modal */
+.video-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 8, 12, 0.9);
+    padding: 1rem;
+}
+
+.video-modal-content {
+    width: 100%;
+    max-width: 960px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+}
+
+.video-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.video-modal-header button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+    transition: all 0.3s var(--ease-out);
+}
+
+.video-modal-header button:hover {
+    background: var(--elevated);
+    color: var(--text);
+}
+
+.video-modal-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+}
+
+.video-modal-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-modal-error {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+/* Description Modal */
+.desc-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.desc-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 12, 0.8);
+    border: none;
+    cursor: pointer;
+}
+
+.desc-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+}
+
+.desc-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.desc-modal-header h3 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.desc-modal-subtitle {
+    margin-top: 0.25rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.desc-modal-close-btn {
+    background: var(--elevated);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+}
+
+.desc-modal-close-btn:hover {
+    background: var(--elevated-hover);
+    color: var(--text);
+}
+
+.desc-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 1.25rem;
+}
+
+.desc-modal-body p {
+    white-space: pre-line;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.desc-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.25rem;
+    border-top: 1px solid var(--border);
+}
+
+.desc-modal-done-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-out);
+}
+
+.desc-modal-done-btn:hover {
+    background: #6d28d9;
+}
+
+/* ========================
+   RESPONSIVE BREAKPOINTS
+   ======================== */
+
+/* Tablets (768px - 1023px) */
+@media (max-width: 1023px) {
+    .projects-intro,
+    .projects-outro {
+        min-height: 70vh;
+        padding: 5rem clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .projects-intro-title,
+    .projects-outro-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+}
+
+/* Large Phones (576px - 767px) */
+@media (max-width: 767px) {
+    .projects-intro,
+    .projects-outro {
+        min-height: 60vh;
+        padding: 5rem clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .projects-intro-title,
+    .projects-outro-title {
+        font-size: 2.75rem;
+    }
+
+    .projects-intro-text,
+    .projects-outro-text {
+        font-size: 0.95rem;
+    }
+
+    .pin-card {
+        min-height: auto;
+    }
+
+    .pin-card-inner {
+        min-height: auto;
+        padding: 2rem clamp(1.5rem, 5vw, 4rem);
+        gap: 1rem;
+    }
+
+    .pin-card-number {
+        font-size: 3rem;
+    }
+
+    .pin-card-title {
+        font-size: 1.6rem;
+    }
+
+    .pin-card-image img {
+        max-height: 260px;
+    }
+
+    .pin-card-desc-text {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 3;
+    }
+
+    .pin-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.7rem;
+    }
+
+    .video-modal-content {
+        border-radius: 8px;
+    }
+
+    .desc-modal-content {
+        border-radius: 8px;
+    }
+}
+
+/* Small Phones (up to 575px) */
+@media (max-width: 575px) {
+    .projects-nav {
+        padding: 1rem 1.25rem;
+    }
+
+    .projects-back-link {
+        font-size: 0.65rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .projects-intro,
+    .projects-outro {
+        min-height: 50vh;
+        padding: 4rem 1.25rem;
+    }
+
+    .projects-intro-title,
+    .projects-outro-title {
+        font-size: 2.25rem;
+    }
+
+    .pin-card-inner {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .pin-card-number {
+        font-size: 2.5rem;
+    }
+
+    .pin-card-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .pin-card-image img {
+        max-height: 200px;
+    }
+
+    .pin-card-actions {
+        padding-top: 1rem;
+    }
+}
+
+/* Very small phones (under 375px) */
+@media (max-width: 374px) {
+    .projects-intro-title,
+    .projects-outro-title {
+        font-size: 1.9rem;
+    }
+
+    .pin-card-title {
+        font-size: 1.25rem;
+    }
+
+    .pin-card-number {
+        font-size: 2rem;
+    }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+    .projects-intro,
+    .projects-outro {
+        min-height: auto;
+        padding: 4rem 2rem;
+    }
+
+    .pin-card {
+        min-height: auto;
+    }
+
+    .pin-card-inner {
+        min-height: auto;
+    }
+}
