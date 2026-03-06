@@ -7,6 +7,7 @@ import Capabilities from './components/Capabilities/Capabilities'
 import Testimonial from './components/Testimonial/Testimonial'
 import CTA from './components/CTA/CTA'
 import Footer from './components/Footer/Footer'
+import CookieBanner from './components/CookieBanner/CookieBanner'
 import Dither from './components/Dither'
 import './App.css'
 
@@ -41,6 +42,7 @@ function App() {
           <CTA />
         </main>
         <Footer />
+        <CookieBanner />
       </div>
     </div>
   )
