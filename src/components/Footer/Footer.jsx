@@ -42,10 +42,10 @@ function Footer() {
                     <div className="footer-links">
                         <div className="footer-col">
                             <span className="footer-col-title mono">Navigation</span>
-                            <a href="#work">Work</a>
-                            <a href="#process">Process</a>
-                            <a href="#capabilities">Capabilities</a>
-                            <a href="#contact">Contact</a>
+                            <a href="/#work">Work</a>
+                            <a href="/#process">Process</a>
+                            <a href="/#capabilities">Capabilities</a>
+                            <a href="/#contact">Contact</a>
                         </div>
                         <div className="footer-col">
                             <span className="footer-col-title mono">Connect</span>

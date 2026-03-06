@@ -1,0 +1,599 @@
+/* ========================
+   POS PRODUCT PAGE
+   ======================== */
+
+.pos-page {
+    background: var(--void);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* Back button */
+.pos-back-btn {
+    position: fixed;
+    top: 80px;
+    left: clamp(1.5rem, 5vw, 4rem);
+    z-index: 99;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    background: rgba(8, 8, 12, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.pos-back-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ========================
+   HERO
+   ======================== */
+.pos-hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pos-hero .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    width: 100%;
+}
+
+/* Eyebrow */
+.pos-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+}
+
+.pos-hero-eyebrow .eyebrow-line {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+}
+
+/* Title */
+.pos-hero-title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+}
+
+.pos-hero-title-accent {
+    color: var(--accent);
+    text-shadow: 0 0 60px var(--accent-glow);
+}
+
+/* Subtitle */
+.pos-hero-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.pos-hero-subtitle .highlight {
+    color: var(--status-yellow);
+    font-weight: 600;
+}
+
+.pos-hero-powered {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+/* Highlights row */
+.pos-highlights {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.pos-highlight-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.pos-highlight-card i {
+    color: var(--status-yellow);
+    font-size: 1rem;
+}
+
+.pos-highlight-card strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.pos-highlight-card span {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+}
+
+/* Hero desc */
+.pos-hero-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.pos-hero-desc strong {
+    color: var(--text);
+}
+
+/* CTA buttons */
+.pos-hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+/* Full-width button override for pricing cards */
+.pos-btn-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Scroll down indicator */
+.pos-scroll-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--status-yellow);
+}
+
+.scroll-down-mouse {
+    width: 20px;
+    height: 32px;
+    border: 2px solid var(--status-yellow);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.scroll-down-wheel {
+    width: 3px;
+    height: 8px;
+    background: var(--status-yellow);
+    border-radius: 2px;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(4px); opacity: 0.3; }
+}
+
+/* ========================
+   SECTIONS SHARED
+   ======================== */
+.pos-features,
+.pos-pricing,
+.pos-benefits,
+.pos-cta-section {
+    padding: 6rem 0;
+}
+
+.pos-features .container,
+.pos-pricing .container,
+.pos-benefits .container,
+.pos-cta-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* Section header */
+.pos-section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.pos-section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+/* ========================
+   PRICING
+   ======================== */
+.pos-billing-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pos-billing-toggle button {
+    padding: 0.6rem 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    border-radius: 6px;
+    cursor: none;
+    transition: all 0.3s;
+}
+
+.pos-billing-toggle button.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Pricing grid */
+.pos-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.pos-pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.pos-pricing-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+}
+
+.pos-pricing-card--popular {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, var(--surface), rgba(124, 58, 237, 0.05));
+}
+
+.pos-pricing-card--popular:hover {
+    border-color: var(--accent);
+}
+
+.pos-pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.pos-pricing-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.pos-pricing-price {
+    margin-bottom: 0.75rem;
+}
+
+.pos-pricing-amount {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.pos-pricing-period {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.pos-pricing-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.pos-pricing-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.pos-pricing-feature--included {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pos-pricing-feature--included i {
+    color: var(--status-yellow);
+    font-size: 0.9rem;
+}
+
+.pos-pricing-feature--disabled {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.4;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pos-pricing-feature--disabled i {
+    font-size: 0.9rem;
+}
+
+/* ========================
+   BENEFITS GRID
+   ======================== */
+.pos-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.pos-benefit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.pos-benefit-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.pos-benefit-card i {
+    font-size: 1.5rem;
+    color: var(--status-yellow);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.pos-benefit-card strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.pos-benefit-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ========================
+   CTA SECTION
+   ======================== */
+.pos-cta-section {
+    padding: 4rem 0;
+}
+
+.pos-cta-inner {
+    background: linear-gradient(135deg, var(--surface), rgba(124, 58, 237, 0.08));
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 4rem 3rem;
+    text-align: center;
+}
+
+.pos-cta-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.pos-cta-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.pos-cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+/* Tablets */
+@media (max-width: 1023px) {
+    .pos-hero {
+        padding: 6rem 0 2.5rem;
+    }
+
+    .pos-pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .pos-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pos-cta-inner {
+        padding: 3rem 2rem;
+    }
+}
+
+/* Large phones */
+@media (max-width: 767px) {
+    .pos-back-btn {
+        top: 70px;
+        font-size: 0.6rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .pos-hero {
+        padding: 5rem 0 2rem;
+        min-height: 100svh;
+    }
+
+    .pos-hero-title {
+        font-size: 2.5rem;
+    }
+
+    .pos-highlights {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .pos-highlight-card {
+        width: 100%;
+    }
+
+    .pos-hero-desc {
+        font-size: 0.9rem;
+    }
+
+    .pos-hero-cta {
+        flex-direction: column;
+    }
+
+    .pos-hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pos-cta-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pos-benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pos-section-title {
+        font-size: 1.75rem;
+    }
+
+    .pos-features,
+    .pos-pricing,
+    .pos-benefits,
+    .pos-cta-section {
+        padding: 4rem 0;
+    }
+
+    .pos-cta-inner {
+        padding: 2.5rem 1.5rem;
+    }
+
+}
+
+/* Small phones */
+@media (max-width: 575px) {
+    .pos-hero {
+        padding: 4.5rem 0 1.5rem;
+    }
+
+    .pos-hero-title {
+        font-size: 2rem;
+    }
+
+    .pos-hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .pos-pricing-amount {
+        font-size: 1.5rem;
+    }
+
+    .pos-benefit-card {
+        padding: 1.25rem;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 374px) {
+    .pos-hero-title {
+        font-size: 1.75rem;
+    }
+}
