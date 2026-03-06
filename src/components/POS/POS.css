@@ -8,34 +8,6 @@
     min-height: 100vh;
 }
 
-/* Back button */
-.pos-back-btn {
-    position: fixed;
-    top: 80px;
-    left: clamp(1.5rem, 5vw, 4rem);
-    z-index: 99;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    text-decoration: none;
-    padding: 0.4rem 0.8rem;
-    background: rgba(8, 8, 12, 0.6);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.pos-back-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-}
-
 /* ========================
    HERO
    ======================== */
@@ -44,7 +16,7 @@
     min-height: 100dvh;
     display: flex;
     align-items: center;
-    padding: 7rem 0 3rem;
+    padding: 8rem 0 3rem;
     position: relative;
     overflow: hidden;
 }
@@ -505,12 +477,6 @@
 
 /* Large phones */
 @media (max-width: 767px) {
-    .pos-back-btn {
-        top: 70px;
-        font-size: 0.6rem;
-        padding: 0.3rem 0.6rem;
-    }
-
     .pos-hero {
         padding: 5rem 0 2rem;
         min-height: 100svh;
