@@ -8,12 +8,12 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
 
-        // Default consent - analytics granted, ads denied
+        // Default consent - deny all until user accepts
         gtag('consent', 'default', {
             'ad_storage': 'denied',
             'ad_user_data': 'denied',
             'ad_personalization': 'denied',
-            'analytics_storage': 'granted'
+            'analytics_storage': 'denied'
         });
 
         gtag('js', new Date());
