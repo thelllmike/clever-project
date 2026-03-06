@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Work.css'
+import { Link } from 'react-router-dom'
 import Button from '../Button/Button'
 
 const workItems = [
@@ -69,12 +70,9 @@ function Work() {
                             <span className="text-muted">that deliver</span>
                         </h2>
                     </div>
-                    <Button
-                        href="https://www.cleverproject.lk"
-                        target="_blank"
-                    >
-                        All Projects <i className="ri-external-link-line"></i>
-                    </Button>
+                    <Link to="/projects" className="btn">
+                        All Projects <i className="ri-arrow-right-line"></i>
+                    </Link>
                 </div>
 
                 <div className="work-grid">
