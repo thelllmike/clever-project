@@ -88,6 +88,27 @@
     line-height: 1.6;
 }
 
+.cap-card-arrow {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    background: var(--elevated);
+    transition: all 0.4s var(--ease-out);
+}
+
+.cap-card:hover .cap-card-arrow {
+    color: var(--void);
+    background: var(--accent);
+    transform: translate(4px, -4px);
+}
+
 /* Tool marquee */
 /* Tool curved loop customization */
 .capabilities-loop-text {

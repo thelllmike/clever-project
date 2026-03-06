@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './Capabilities.css'
 import CurvedLoop from '../CurvedLoop'
 
@@ -7,7 +8,8 @@ const capabilities = [
         icon: 'ri-store-2-line',
         title: 'POS Development',
         description: 'Custom Point of Sale systems with inventory management, billing, and real-time analytics.',
-        featured: true
+        featured: true,
+        link: '/pos'
     },
     {
         icon: 'ri-flow-chart',
@@ -81,18 +83,39 @@ function Capabilities() {
                 </div>
 
                 <div className="cap-grid">
-                    {capabilities.map((cap, index) => (
-                        <div
-                            className={`cap-card ${cap.featured ? 'featured' : ''} reveal reveal-delay-${(index % 3) + 1}`}
-                            key={index}
-                        >
-                            <div className="cap-icon">
-                                <i className={cap.icon}></i>
+                    {capabilities.map((cap, index) => {
+                        const cardContent = (
+                            <>
+                                <div className="cap-icon">
+                                    <i className={cap.icon}></i>
+                                </div>
+                                <h3 className="cap-title">{cap.title}</h3>
+                                <p className="cap-desc">{cap.description}</p>
+                                {cap.link && (
+                                    <div className="cap-card-arrow">
+                                        <i className="ri-arrow-right-up-line"></i>
+                                    </div>
+                                )}
+                            </>
+                        )
+                        return cap.link ? (
+                            <Link
+                                to={cap.link}
+                                className={`cap-card ${cap.featured ? 'featured' : ''} reveal reveal-delay-${(index % 3) + 1}`}
+                                key={index}
+                                style={{ textDecoration: 'none', color: 'inherit' }}
+                            >
+                                {cardContent}
+                            </Link>
+                        ) : (
+                            <div
+                                className={`cap-card ${cap.featured ? 'featured' : ''} reveal reveal-delay-${(index % 3) + 1}`}
+                                key={index}
+                            >
+                                {cardContent}
                             </div>
-                            <h3 className="cap-title">{cap.title}</h3>
-                            <p className="cap-desc">{cap.description}</p>
-                        </div>
-                    ))}
+                        )
+                    })}
                 </div>
 
                 {/* Tool curved loop */}

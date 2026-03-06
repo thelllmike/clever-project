@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer'
 import CookieBanner from './components/CookieBanner/CookieBanner'
 import Dither from './components/Dither'
 import Projects from './components/Projects/Projects'
+import POS from './components/POS/POS'
 import './App.css'
 
 function Home() {
@@ -56,6 +57,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/pos" element={<POS />} />
       </Routes>
     </BrowserRouter>
   )
