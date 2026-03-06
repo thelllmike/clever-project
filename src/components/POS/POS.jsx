@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import CustomCursor from '../CustomCursor/CustomCursor'
@@ -87,11 +86,6 @@ export default function POS() {
             <CustomCursor />
             <Header />
             <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} videoUrl="https://youtu.be/-cEsupIORXM?si=15bru5-dgBvashxA" title="POS System Demo" />
-
-            {/* Back button */}
-            <Link to="/" className="pos-back-btn mono">
-                <i className="ri-arrow-left-line"></i> Back to Home
-            </Link>
 
             {/* Hero */}
             <section className="pos-hero">
