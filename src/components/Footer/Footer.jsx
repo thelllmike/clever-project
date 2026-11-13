@@ -46,12 +46,11 @@ function Footer() {
                         </div>
                         <div className="footer-col">
                             <span className="footer-col-title mono">Products</span>
-                            <a href="/#products">AmigoTap</a>
-                            <a href="/#products">AmigoTap Mobile App</a>
-                            <a href="/pos">Mobile POS</a>
-                            <a href="/#products">Petty Cash</a>
-                            <a href="/#products">Fix It</a>
-                            <a href="/#products">Seettu Cycle</a>
+                            <a href="https://amigotap.com/" target="_blank" rel="noopener">AmigoTap</a>
+                            <a href="https://mobile-apo-web.vercel.app/" target="_blank" rel="noopener">Mobile POS</a>
+                            <a href="https://seettuweb.vercel.app/" target="_blank" rel="noopener">Petty Cash</a>
+                            <a href="https://fixitweb-psi.vercel.app/" target="_blank" rel="noopener">FixIt</a>
+                            <a href="https://fixitweb-7w8f.vercel.app/" target="_blank" rel="noopener">Seettu Circle</a>
                         </div>
                         <div className="footer-col">
                             <span className="footer-col-title mono">Connect</span>
