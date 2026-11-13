@@ -23,7 +23,7 @@ const POS = lazy(() => import('./components/POS/POS'))
 function Home() {
   useSeo({
     title: 'Clever Project | Software Development Company in Sri Lanka',
-    description: 'Sri Lankan software studio building POS systems, e-commerce, web and mobile apps with AI. Home of AmigoTap, Mobile POS, Petty Cash and Fix It.',
+    description: 'Sri Lankan software studio building POS systems, e-commerce, web and mobile apps with AI. Home of AmigoTap, Mobile POS, Petty Cash and FixIt.',
     path: '/'
   })
 

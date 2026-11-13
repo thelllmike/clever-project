@@ -1,24 +1,20 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import './Products.css'
-
-const WHATSAPP = 'https://wa.me/94704057137'
-const demoLink = (product) =>
-    `${WHATSAPP}?text=${encodeURIComponent(`Hi, I'd like a demo of ${product}.`)}`
 
 const flagship = {
     name: 'AmigoTap',
-    tagline: 'Our flagship product, on the web and in your pocket.',
+    url: 'https://amigotap.com/',
+    tagline: 'Tap. Scan. Connect.',
     description:
-        'AmigoTap is the platform we build and run ourselves. Use it from the browser, or take it with you in the AmigoTap mobile app.',
+        'Smart NFC business cards, QR display stands and a QR order menu system for restaurants. Made in Sri Lanka, shipped across the island and worldwide.',
     platforms: [
         { icon: 'ri-global-line', label: 'AmigoTap Web' },
         { icon: 'ri-smartphone-line', label: 'AmigoTap Mobile App' }
     ],
     points: [
-        'One account across web and mobile',
-        'Built, hosted and supported by Clever Project',
-        'New releases shipped continuously'
+        'AmigoTap NFC business card',
+        'AmigoStand QR display',
+        'QR order menu system for restaurants'
     ]
 }
 
@@ -28,40 +24,36 @@ const products = [
         name: 'Mobile POS',
         category: 'Point of Sale',
         description:
-            'Sell from a phone or tablet. Billing, inventory and sales reports stay in sync wherever you are.',
-        features: ['Billing & receipts', 'Inventory tracking', 'Sales reports'],
-        to: '/pos',
-        cta: 'Explore POS'
+            'A billing app for Sri Lankan grocery shops, cafés and salons. Run your till from the Android phone in your pocket.',
+        features: ['Bills & Sinhala receipts', 'Stock tracking', 'Customer credit'],
+        href: 'https://mobile-apo-web.vercel.app/'
     },
     {
         icon: 'ri-wallet-3-line',
         name: 'Petty Cash',
         category: 'Finance',
         description:
-            'Record day-to-day spending as it happens and always know where the cash float went.',
-        features: ['Expense logging', 'Float & balance tracking', 'Spending reports'],
-        href: demoLink('the Petty Cash app'),
-        cta: 'Request a demo'
+            'The pocket cash book for small businesses. Track income and expenses and see your profit, all from your phone.',
+        features: ['Income & expense tracking', 'Branded invoices & quotations', 'Receipts & profit view'],
+        href: 'https://seettuweb.vercel.app/'
     },
     {
         icon: 'ri-tools-line',
-        name: 'Fix It',
-        category: 'Service & Repairs',
+        name: 'FixIt',
+        category: 'Home Services',
         description:
-            'Log a repair job, assign it, and follow it through to done, without losing a request on the way.',
-        features: ['Job requests', 'Status tracking', 'Team assignment'],
-        href: demoLink('the Fix It app'),
-        cta: 'Request a demo'
+            'Skilled workers on your doorstep across Sri Lanka. Book an electrician, plumber, cleaner or carpenter in a few taps.',
+        features: ['Book trusted workers', 'Price agreed before work starts', 'Pay by cash, card or wallet'],
+        href: 'https://fixitweb-psi.vercel.app/'
     },
     {
         icon: 'ri-refresh-line',
-        name: 'Seettu Cycle',
+        name: 'Seettu Circle',
         category: 'Group Savings',
         description:
-            'Run a seettu without the notebook. Track members, contributions and whose turn it is each cycle.',
-        features: ['Member & group management', 'Contribution tracking', 'Payout schedule per cycle'],
-        href: demoLink('the Seettu Cycle app'),
-        cta: 'Request a demo'
+            'The app for running a seettu group. One shared record, so everyone in the circle sees the same thing.',
+        features: ['Every payment on record', 'Payouts tracked', 'Clear turn order'],
+        href: 'https://fixitweb-7w8f.vercel.app/'
     }
 ]
 
@@ -124,12 +116,12 @@ function Products() {
                         </div>
 
                         <a
-                            href={demoLink('AmigoTap')}
+                            href={flagship.url}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noopener"
                             className="btn btn-primary product-flagship-cta"
                         >
-                            Request a demo <i className="ri-arrow-right-line"></i>
+                            Visit amigotap.com <i className="ri-arrow-right-up-line"></i>
                         </a>
                     </div>
 
@@ -170,20 +162,16 @@ function Products() {
                                     ))}
                                 </ul>
                                 <span className="product-card-cta">
-                                    {product.cta} <i className="ri-arrow-right-up-line"></i>
+                                    Visit website <i className="ri-arrow-right-up-line"></i>
                                 </span>
                             </>
                         )
                         const className = `product-card reveal reveal-delay-${(idx % 2) + 1}`
-                        return product.to ? (
-                            <Link to={product.to} className={className} key={product.name}>
-                                {inner}
-                            </Link>
-                        ) : (
+                        return (
                             <a
                                 href={product.href}
                                 target="_blank"
-                                rel="noopener noreferrer"
+                                rel="noopener"
                                 className={className}
                                 key={product.name}
                             >
