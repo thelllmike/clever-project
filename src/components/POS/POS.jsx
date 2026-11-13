@@ -6,6 +6,7 @@ import CookieBanner from '../CookieBanner/CookieBanner'
 import VideoModal from '../Projects/VideoModal'
 import Button from '../Button/Button'
 import MagicBento from './MagicBento'
+import useSeo from '../../hooks/useSeo'
 import '../Projects/Projects.css'
 import './POS.css'
 
@@ -65,7 +66,42 @@ const benefits = [
     { icon: 'ri-refresh-line', title: 'Free Lifetime Updates', desc: 'Get new features and improvements at no extra cost. Always up to date.' },
 ]
 
+const posSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'SoftwareApplication',
+            name: 'Clever Project POS',
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Web, Android, iOS',
+            url: 'https://www.cleverproject.lk/pos',
+            publisher: { '@type': 'Organization', name: 'Clever Project', url: 'https://www.cleverproject.lk/' },
+            offers: plans
+                .filter(plan => plan.price.startsWith('LKR'))
+                .map(plan => ({
+                    '@type': 'Offer',
+                    name: plan.name,
+                    price: plan.price.replace(/[^0-9]/g, ''),
+                    priceCurrency: 'LKR'
+                }))
+        },
+        {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.cleverproject.lk/' },
+                { '@type': 'ListItem', position: 2, name: 'POS System', item: 'https://www.cleverproject.lk/pos' }
+            ]
+        }
+    ]
+}
+
 export default function POS() {
+    useSeo({
+        title: 'POS System Sri Lanka | Cloud POS Software | Clever Project',
+        description: 'Cloud POS system for Sri Lankan businesses: billing, inventory, multi-branch and real-time analytics. One-time pricing, free lifetime updates.',
+        path: '/pos',
+        jsonLd: posSchema
+    })
     const sectionRefs = useRef([])
     const [billingAnnual, setBillingAnnual] = useState(false)
     const [videoOpen, setVideoOpen] = useState(false)
