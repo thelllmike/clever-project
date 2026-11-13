@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Header.css'
 import GlassSurface from '../GlassSurface'
 import Button from '../Button/Button'
-import logo from '../../assets/logo-white.svg'
+import logo from '../../assets/logo-one-line-dark.svg'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -59,15 +59,12 @@ function Header() {
                 <div className="container">
                     <nav className="nav">
                         <a href="/" className="logo-link">
-                            <img src={logo} alt="Clever Project" className="logo" />
-                            <span className="logo-text">
-                                <span className="logo-text-top">CLEVER</span>
-                                <span className="logo-text-bottom">PROJECT</span>
-                            </span>
+                            <img src={logo} alt="Clever Project logo" className="logo" width="754" height="144" />
                         </a>
 
                         <div className="nav-center">
                             <ul className="nav-links">
+                                <li><a href="/#products" className="nav-link">Products</a></li>
                                 <li><a href="/#work" className="nav-link">Work</a></li>
                                 <li><a href="/#process" className="nav-link">Process</a></li>
                                 <li><a href="/#capabilities" className="nav-link">Capabilities</a></li>
@@ -108,20 +105,26 @@ function Header() {
                 <nav className="mobile-nav">
                     <ul className="mobile-nav-links">
                         <li>
-                            <a href="/#work" className="mobile-nav-link" onClick={handleNavClick}>
+                            <a href="/#products" className="mobile-nav-link" onClick={handleNavClick}>
                                 <span className="mobile-nav-number">01</span>
+                                Products
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/#work" className="mobile-nav-link" onClick={handleNavClick}>
+                                <span className="mobile-nav-number">02</span>
                                 Work
                             </a>
                         </li>
                         <li>
                             <a href="/#process" className="mobile-nav-link" onClick={handleNavClick}>
-                                <span className="mobile-nav-number">02</span>
+                                <span className="mobile-nav-number">03</span>
                                 Process
                             </a>
                         </li>
                         <li>
                             <a href="/#capabilities" className="mobile-nav-link" onClick={handleNavClick}>
-                                <span className="mobile-nav-number">03</span>
+                                <span className="mobile-nav-number">04</span>
                                 Capabilities
                             </a>
                         </li>

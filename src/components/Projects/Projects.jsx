@@ -4,12 +4,13 @@ import CustomCursor from '../CustomCursor/CustomCursor'
 import VideoModal from './VideoModal'
 import DescriptionModal from './DescriptionModal'
 import './Projects.css'
+import useSeo from '../../hooks/useSeo'
 
 const projects = [
     {
         id: 1,
         title: 'Security Management App',
-        image: '/img/app1.jpeg',
+        image: '/img/app1.webp',
         description: `A complete security operations app designed to keep daily management fast, organized, and reliable—built for real teams doing real work.
 
 Key Features:
@@ -27,7 +28,7 @@ Tech Stack: Flutter • REST API • Secure Auth & Permission Handling`,
     {
         id: 2,
         title: 'E-commerce Platform',
-        image: '/img/ecom1.jpeg',
+        image: '/img/ecom1.webp',
         description: `A modern e-commerce website built to look premium, load fast, and convert visitors into customers—optimized for mobile shopping.
 
 Key Features:
@@ -39,13 +40,13 @@ Key Features:
 • SEO foundation — Proper headings, meta setup, and structure.
 
 Tech Stack: WordPress • WooCommerce • Elementor • SEO • Performance Optimization`,
-        link: 'http://purekosma.com/',
+        link: 'https://purekosma.com/',
         videoUrl: 'https://youtu.be/nfibyKEB6io?si=p0PKhsljPfbhypIv',
     },
     {
         id: 3,
         title: 'Real Estate Listing',
-        image: '/img/ecom2.jpeg',
+        image: '/img/ecom2.webp',
         description: `A real estate listing website designed to showcase properties beautifully and generate high-quality leads—built to be clean, fast, and SEO-ready.
 
 Key Features:
@@ -63,7 +64,7 @@ Tech Stack: WordPress • Elementor • Custom Listing Pages • SEO • Speed O
     {
         id: 4,
         title: 'Eye Wear Online Store',
-        image: '/img/ecom4.jpeg',
+        image: '/img/ecom4.webp',
         description: `An eyewear online store built for clarity, speed, and easy ordering—so customers can browse frames confidently and purchase without friction.
 
 Key Features:
@@ -104,6 +105,11 @@ function ScrollMouseHint() {
 }
 
 export default function Projects() {
+    useSeo({
+        title: 'Our Projects | Web, Mobile & E-Commerce | Clever Project',
+        description: 'Selected projects by Clever Project: mobile apps, e-commerce platforms and web applications built for businesses in Sri Lanka and abroad.',
+        path: '/projects'
+    })
     const rootRef = useRef(null)
     const [videoOpen, setVideoOpen] = useState(false)
     const [activeVideo, setActiveVideo] = useState(null)
@@ -271,7 +277,7 @@ export default function Projects() {
 
                             {/* Image */}
                             <div className="pin-card-image">
-                                <img src={item.image} alt={item.title} loading="lazy" />
+                                <img src={item.image} alt={`${item.title} project screenshot`} loading="lazy" decoding="async" />
                             </div>
 
                             {/* Description + Read more */}

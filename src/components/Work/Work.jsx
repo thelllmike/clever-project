@@ -9,7 +9,6 @@ const workItems = [
         title: 'SECURITY MANAGEMENT APP',
         category: 'Mobile App',
         metric: 'Full-Stack',
-        href: 'https://www.instagram.com/clever.project',
         description: 'Complete security operations app for daily management and team coordination'
     },
     {
@@ -17,7 +16,6 @@ const workItems = [
         title: 'E-COMMERCE PLATFORM',
         category: 'Web Application',
         metric: 'React & Node.js',
-        href: 'https://www.instagram.com/clever.project',
         description: 'Scalable online store with payment integration and inventory management'
     },
     {
@@ -25,7 +23,6 @@ const workItems = [
         title: 'AI-POWERED ANALYTICS',
         category: 'AI Solution',
         metric: 'Machine Learning',
-        href: 'https://www.instagram.com/clever.project',
         description: 'Intelligent data analytics platform with predictive insights'
     },
     {
@@ -33,7 +30,6 @@ const workItems = [
         title: 'BLOCKCHAIN DAPP',
         category: 'Web3',
         metric: 'Solidity & React',
-        href: 'https://www.instagram.com/clever.project',
         description: 'Decentralized application with smart contracts and token integration'
     }
 ]
@@ -77,10 +73,8 @@ function Work() {
 
                 <div className="work-grid">
                     {workItems.map((item, idx) => (
-                        <a
-                            href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                        <Link
+                            to="/projects"
                             className={`work-item reveal reveal-delay-${idx + 1}`}
                             key={item.index}
                         >
@@ -96,7 +90,7 @@ function Work() {
                             <div className="work-item-arrow">
                                 <i className="ri-arrow-right-up-line"></i>
                             </div>
-                        </a>
+                        </Link>
                     ))}
                 </div>
             </div>
