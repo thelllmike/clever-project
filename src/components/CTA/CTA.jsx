@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './CTA.css'
 import Button from '../Button/Button'
+import HireUs from '../HireUs/HireUs'
 
 function CTA() {
     const sectionRef = useRef(null)
@@ -43,6 +44,10 @@ function CTA() {
                         <span className="form-note mono">
                             or email directly: <a href="mailto:info@cleverproject.lk">info@cleverproject.lk</a>
                         </span>
+                        <div className="cta-hire">
+                            <span className="cta-hire-label mono">or work with us through</span>
+                            <HireUs />
+                        </div>
                     </div>
                 </div>
 

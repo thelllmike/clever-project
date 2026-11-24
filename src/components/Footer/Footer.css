@@ -14,7 +14,7 @@
 }
 
 .footer-brand {
-    max-width: 300px;
+    max-width: 360px;
 }
 
 .footer-logo-group {
@@ -158,4 +158,7 @@
         flex-direction: column;
         align-items: flex-start;
     }
+}
+.footer-hire {
+    margin-top: 1.5rem;
 }

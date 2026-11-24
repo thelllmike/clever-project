@@ -68,6 +68,7 @@ function Header() {
                                 <li><a href="/#work" className="nav-link">Work</a></li>
                                 <li><a href="/#process" className="nav-link">Process</a></li>
                                 <li><a href="/#capabilities" className="nav-link">Capabilities</a></li>
+                                <li><a href="/careers" className="nav-link">Careers</a></li>
                             </ul>
                         </div>
 
@@ -126,6 +127,12 @@ function Header() {
                             <a href="/#capabilities" className="mobile-nav-link" onClick={handleNavClick}>
                                 <span className="mobile-nav-number">04</span>
                                 Capabilities
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/careers" className="mobile-nav-link" onClick={handleNavClick}>
+                                <span className="mobile-nav-number">05</span>
+                                Careers
                             </a>
                         </li>
                     </ul>
