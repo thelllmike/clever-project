@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import './Footer.css'
+import HireUs from '../HireUs/HireUs'
 import logo from '../../assets/logo-one-line-dark.svg'
 
 function Footer() {
@@ -33,6 +34,7 @@ function Footer() {
                             <img src={logo} alt="Clever Project logo" className="footer-logo" width="754" height="144" loading="lazy" />
                         </div>
                         <p className="footer-tagline">Software Development Studio</p>
+                        <HireUs size="sm" className="footer-hire" />
                     </div>
 
                     <div className="footer-links">
@@ -42,6 +44,7 @@ function Footer() {
                             <a href="/#work">Work</a>
                             <a href="/#process">Process</a>
                             <a href="/#capabilities">Capabilities</a>
+                            <a href="/careers">Careers</a>
                             <a href="/#contact">Contact</a>
                         </div>
                         <div className="footer-col">

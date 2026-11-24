@@ -318,3 +318,20 @@
         padding: 0.5rem 0;
     }
 }
+.mobile-menu.active .mobile-nav-links li:nth-child(4) .mobile-nav-link {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu.active .mobile-nav-links li:nth-child(5) .mobile-nav-link {
+    transition-delay: 0.3s;
+}
+
+.nav-right .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 1360px) {
+    .nav-links {
+        gap: 2rem;
+    }
+}

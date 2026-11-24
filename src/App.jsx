@@ -19,6 +19,7 @@ import './App.css'
 const Dither = lazy(() => import('./components/Dither'))
 const Projects = lazy(() => import('./components/Projects/Projects'))
 const POS = lazy(() => import('./components/POS/POS'))
+const Careers = lazy(() => import('./components/Careers/Careers'))
 
 function Home() {
   useSeo({
@@ -86,6 +87,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/pos" element={<POS />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:roleId" element={<Careers />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
